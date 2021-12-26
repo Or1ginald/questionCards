@@ -1,0 +1,44 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.3s ease;
+  z-index: 5;
+  color: #fff;
+  background-color: #33495f;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-height: 20px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+.container nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+}
+.container a {
+  color: var(--mainWhite);
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.container .current {
+  border: var(--lightBlue) solid 1px;
+  background-color: #b7ccdc;
+  box-shadow: 0 0 5px 2px #69bbda;
+  color: #69bbda;
+}
+@media (max-width: 450px) {
+  .container {
+    padding: 10px 0.5em;
+  }
+}
+
+/*# sourceMappingURL=Header.module.css.map */
