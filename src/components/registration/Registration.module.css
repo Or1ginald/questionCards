@@ -1,5 +1,22 @@
-.main {
-  color: green;
+.registrationForm {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 1.5em;
+}
+.registrationForm .container {
+  display: flex;
+  flex-direction: column;
+}
+.registrationForm .container h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+.registrationForm .container .form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 /*# sourceMappingURL=Registration.module.css.map */

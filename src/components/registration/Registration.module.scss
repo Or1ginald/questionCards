@@ -1,3 +1,20 @@
-.main {
-  color: green;
+.registrationForm {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 1.5em;
+  .container {
+    display: flex;
+    flex-direction: column;
+    h1{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1em;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap:1em;
+    }
+  }
 }
