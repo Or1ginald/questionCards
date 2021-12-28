@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { FormEvent, memo } from 'react';
 
 import style from './Registration.module.scss';
 
@@ -7,7 +7,7 @@ import { AutoCapitalize } from 'enum';
 import { useInput } from 'hooks';
 import { ReturnComponentType } from 'types';
 
-export const Registration = (): ReturnComponentType => {
+export const Registration = memo((): ReturnComponentType => {
   const { value: email, handleValue: handleEmail, resetValue: resetEmail } = useInput('');
   const {
     value: password,
@@ -63,4 +63,4 @@ export const Registration = (): ReturnComponentType => {
       </div>
     </div>
   );
-};
+});
