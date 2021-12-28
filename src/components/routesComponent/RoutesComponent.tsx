@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import s from './RoutesComponent.module.scss';
 
-import { Profile, Registration } from 'components';
+import { Login, PasswordRecovery, Profile, Registration } from 'components';
 import { PATH } from 'enum';
 
 export const RoutesComponent = memo(() => (
@@ -13,6 +13,8 @@ export const RoutesComponent = memo(() => (
       <Route element={<Navigate to={PATH.PROFILE} />} path="/" />
       <Route element={<Profile />} path={PATH.PROFILE} />
       <Route element={<Registration />} path={PATH.REGISTRATION} />
+      <Route element={<Login />} path={PATH.LOGIN} />
+      <Route element={<PasswordRecovery />} path={PATH.PASSWORD_RECOVERY} />
     </Routes>
   </div>
 ));
