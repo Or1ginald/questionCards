@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { ChangeEvent, memo } from 'react';
 
 import s from './CustomTextInput.module.scss';
 
@@ -9,7 +9,7 @@ type InputProps = {
   placeholder: string;
   type: string;
   className?: string;
-  onChange: () => void;
+  onChange: (value: string) => void;
   value: string;
   name?: string;
   autoCapitalize?: AutoCapitalize.true | AutoCapitalize.false;
@@ -17,6 +17,9 @@ type InputProps = {
 
 export const CustomTextInput = memo((props: InputProps): ReturnComponentType => {
   const { placeholder, type, className, value, onChange, name, autoCapitalize } = props;
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    onChange(e.currentTarget.value);
+  };
   return (
     <div className={s.inputWrap}>
       <input
@@ -24,7 +27,7 @@ export const CustomTextInput = memo((props: InputProps): ReturnComponentType => 
         type={type}
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={onInputChange}
         placeholder={placeholder}
         className={className ?? s.input}
         autoComplete="off"
