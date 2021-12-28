@@ -1,31 +1,44 @@
-import { FormEvent, memo } from 'react';
+import { FormEvent, memo, useCallback } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  setConfirmPasswordAC,
+  setEmailAC,
+  setPasswordAC,
+} from '../../store/reducers/registrationReducer';
 
 import style from './Registration.module.scss';
 
 import { CustomButton, CustomTextInput } from 'components';
 import { AutoCapitalize } from 'enum';
-import { useInput } from 'hooks';
+import { getConfirmPassword, getEmail, getPassword } from 'store';
 import { ReturnComponentType } from 'types';
 
 export const Registration = memo((): ReturnComponentType => {
-  const { value: email, handleValue: handleEmail, resetValue: resetEmail } = useInput('');
-  const {
-    value: password,
-    handleValue: handlePassword,
-    resetValue: resetPassword,
-  } = useInput('');
-  const {
-    value: confirmPassword,
-    handleValue: handleConfirmPassword,
-    resetValue: resetConfirmPassword,
-  } = useInput('');
+  const dispatch = useDispatch();
+
+  const email = useSelector(getEmail);
+  const password = useSelector(getPassword);
+  const confirmPassword = useSelector(getConfirmPassword);
+
+  const handleEmailChange = useCallback((value: string) => {
+    dispatch(setEmailAC(value));
+  }, []);
+  const handlePasswordChange = useCallback((value: string) => {
+    dispatch(setPasswordAC(value));
+  }, []);
+  const handleConfirmPasswordChange = useCallback((value: string) => {
+    dispatch(setConfirmPasswordAC(value));
+  }, []);
+
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (password === confirmPassword) {
       console.log('Отправил на сервер, санка');
-      resetEmail();
-      resetPassword();
-      resetConfirmPassword();
+      dispatch(setEmailAC(null));
+      dispatch(setPasswordAC(null));
+      dispatch(setConfirmPasswordAC(null));
       console.log('Редирект на логин');
     }
     if (password !== confirmPassword) {
@@ -39,22 +52,22 @@ export const Registration = memo((): ReturnComponentType => {
         <form onSubmit={onSubmitClick} className={style.form}>
           <CustomTextInput
             placeholder="Email"
-            value={email}
-            onChange={handleEmail}
+            value={email ?? ''}
+            onChange={handleEmailChange}
             type="text"
             autoCapitalize={AutoCapitalize.false}
           />
           <CustomTextInput
             placeholder="Password"
-            onChange={handlePassword}
-            value={password}
-            type={password}
+            onChange={handlePasswordChange}
+            value={password ?? ''}
+            type="password"
           />
           <CustomTextInput
             placeholder="Confirm Password"
-            onChange={handleConfirmPassword}
-            value={confirmPassword}
-            type={password}
+            onChange={handleConfirmPasswordChange}
+            value={confirmPassword ?? ''}
+            type="password"
           />
           <div>
             <CustomButton title="Create" type="submit" />
