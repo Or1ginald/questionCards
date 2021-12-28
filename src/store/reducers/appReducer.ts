@@ -3,8 +3,13 @@ export type appReducerInitialStateType = {
   isAuth: boolean;
 };
 
+export const appReducerInitState = {
+  isLoading: false,
+  isAuth: true,
+};
+
 export const appReducer = (
-  state: appReducerInitialStateType,
+  state: appReducerInitialStateType = appReducerInitState,
   action: any,
 ): appReducerInitialStateType => {
   switch (action.type) {
