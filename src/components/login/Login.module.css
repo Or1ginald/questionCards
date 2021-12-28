@@ -1,0 +1,33 @@
+.loginForm {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 1.5em;
+}
+.loginForm .container {
+  display: flex;
+  flex-direction: column;
+}
+.loginForm .container h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+.loginForm .container .form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.loginForm .container .form .additions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.loginForm .container .form .signUpContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3em;
+}
+
+/*# sourceMappingURL=Login.module.css.map */
