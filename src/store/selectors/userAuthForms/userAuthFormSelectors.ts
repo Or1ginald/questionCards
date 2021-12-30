@@ -2,10 +2,10 @@ import { RootStateType } from 'store';
 import { Nullable } from 'types';
 
 export const getEmail = (state: RootStateType): Nullable<string> =>
-  state.registration.email;
+  state.userAuthForm.email;
 export const getPassword = (state: RootStateType): Nullable<string> =>
-  state.registration.password;
+  state.userAuthForm.password;
 export const getConfirmPassword = (state: RootStateType): Nullable<string> =>
-  state.registration.confirmPassword;
+  state.userAuthForm.confirmPassword;
 export const getError = (state: RootStateType): Nullable<string> =>
-  state.registration.error;
+  state.userAuthForm.error;

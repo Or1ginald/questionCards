@@ -5,7 +5,7 @@ const setPassword = 'REGISTRATION/SET_PASSWORD';
 const setConfirmPassword = 'REGISTRATION/SET_CONFIRM_PASSWORD';
 const setError = 'REGISTRATION/SET_ERROR';
 
-export type RegistrationReducerActionsType =
+export type userAuthFormReducerActionsType =
   | setEmailACType
   | setPasswordACType
   | setConfirmPasswordACType
@@ -16,24 +16,24 @@ export type setPasswordACType = ReturnType<typeof setPasswordAC>;
 export type setConfirmPasswordACType = ReturnType<typeof setConfirmPasswordAC>;
 export type setErrorACType = ReturnType<typeof setErrorAC>;
 
-export type RegistrationReducerInitStateType = {
+export type UserAuthFormInitStateType = {
   email: Nullable<string>;
   password: Nullable<string>;
   confirmPassword: Nullable<string>;
   error: Nullable<string>;
 };
 
-export const registrationReducerInitState = {
+export const userAuthFormReducerInitState = {
   email: null,
   password: null,
   confirmPassword: null,
   error: null,
 };
 
-export const registrationReducer = (
-  state: RegistrationReducerInitStateType = registrationReducerInitState,
-  action: RegistrationReducerActionsType,
-): RegistrationReducerInitStateType => {
+export const userAuthFormReducer = (
+  state: UserAuthFormInitStateType = userAuthFormReducerInitState,
+  action: userAuthFormReducerActionsType,
+): UserAuthFormInitStateType => {
   switch (action.type) {
     case setEmail:
       return { ...state, email: action.email };

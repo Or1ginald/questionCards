@@ -1,2 +1,2 @@
 export { appReducer } from './appReducer';
-export { registrationReducer } from './registrationReducer';
+export { userAuthFormReducer } from './userAuthFormReducer';
