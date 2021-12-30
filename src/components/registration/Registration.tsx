@@ -1,4 +1,4 @@
-import { FormEvent, memo, useCallback } from 'react';
+import { FormEvent, memo, useCallback, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -6,7 +6,7 @@ import {
   setConfirmPasswordAC,
   setEmailAC,
   setPasswordAC,
-} from '../../store/reducers/registrationReducer';
+} from '../../store/reducers/userAuthFormReducer';
 
 import style from './Registration.module.scss';
 
@@ -16,13 +16,26 @@ import { getConfirmPassword, getEmail, getPassword } from 'store';
 import { ReturnComponentType } from 'types';
 
 export const Registration = memo((): ReturnComponentType => {
+  console.log('rerender');
   const dispatch = useDispatch();
 
   const email = useSelector(getEmail);
   const password = useSelector(getPassword);
   const confirmPassword = useSelector(getConfirmPassword);
 
+  useEffect(
+    () =>
+      function cleanup() {
+        console.log('cleanup');
+        dispatch(setEmailAC(null));
+        dispatch(setPasswordAC(null));
+        dispatch(setConfirmPasswordAC(null));
+      },
+    [],
+  );
+
   const handleEmailChange = useCallback((value: string) => {
+    console.log('handler enter');
     dispatch(setEmailAC(value));
   }, []);
   const handlePasswordChange = useCallback((value: string) => {

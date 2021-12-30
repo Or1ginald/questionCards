@@ -1,20 +1,39 @@
-import React, { FormEvent, memo } from 'react';
+import React, { FormEvent, memo, useCallback, useEffect } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { setEmailAC } from '../../store/reducers/userAuthFormReducer';
 
 import style from './PasswordRecovery.module.scss';
 
 import { CustomButton, CustomTextInput } from 'components';
 import { AutoCapitalize, PATH } from 'enum';
-import { useInput } from 'hooks';
+import { getEmail } from 'store';
 
 export const PasswordRecovery = memo(() => {
-  const { value: email, handleValue: handleEmail, resetValue: resetEmail } = useInput('');
+  const dispatch = useDispatch();
+
+  const email = useSelector(getEmail);
+
+  useEffect(
+    () =>
+      function cleanup() {
+        console.log('cleanup');
+        dispatch(setEmailAC(null));
+      },
+    [],
+  );
+
+  const handleEmailChange = useCallback((value: string) => {
+    dispatch(setEmailAC(value));
+  }, []);
+
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     console.log('Отправил на сервер, санка');
-    resetEmail();
+    dispatch(setEmailAC(null));
   };
   return (
     <div className={style.passwordRecoveryForm}>
@@ -23,8 +42,8 @@ export const PasswordRecovery = memo(() => {
         <form onSubmit={onSubmitClick} className={style.form}>
           <CustomTextInput
             placeholder="Email"
-            value={email}
-            onChange={handleEmail}
+            value={email ?? ''}
+            onChange={handleEmailChange}
             type="text"
             autoCapitalize={AutoCapitalize.false}
           />

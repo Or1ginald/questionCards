@@ -1,26 +1,46 @@
-import React, { FormEvent, memo } from 'react';
+import React, { FormEvent, memo, useCallback, useEffect } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { setEmailAC, setPasswordAC } from '../../store/reducers/userAuthFormReducer';
 
 import style from './Login.module.scss';
 
 import { CustomButton, CustomTextInput } from 'components';
 import { AutoCapitalize, PATH } from 'enum';
-import { useInput } from 'hooks';
+import { getEmail, getPassword } from 'store';
 
 export const Login = memo(() => {
-  const { value: email, handleValue: handleEmail, resetValue: resetEmail } = useInput('');
-  const {
-    value: password,
-    handleValue: handlePassword,
-    resetValue: resetPassword,
-  } = useInput('');
+  const dispatch = useDispatch();
+
+  const email = useSelector(getEmail);
+  const password = useSelector(getPassword);
+
+  useEffect(
+    () =>
+      function cleanup() {
+        console.log('cleanup');
+        dispatch(setEmailAC(null));
+        dispatch(setPasswordAC(null));
+      },
+    [],
+  );
+
+  const handleEmailChange = useCallback((value: string) => {
+    console.log('handler enter');
+    dispatch(setEmailAC(value));
+  }, []);
+  const handlePasswordChange = useCallback((value: string) => {
+    dispatch(setPasswordAC(value));
+  }, []);
+
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     console.log('Отправил на сервер, санка');
-    resetEmail();
-    resetPassword();
+    dispatch(setEmailAC(null));
+    dispatch(setPasswordAC(null));
     console.log('Редирект на профаил');
   };
 
@@ -31,16 +51,16 @@ export const Login = memo(() => {
         <form onSubmit={onSubmitClick} className={style.form}>
           <CustomTextInput
             placeholder="Email"
-            value={email}
-            onChange={handleEmail}
+            value={email ?? ''}
+            onChange={handleEmailChange}
             type="text"
             autoCapitalize={AutoCapitalize.false}
           />
           <CustomTextInput
             placeholder="Password"
-            onChange={handlePassword}
-            value={password}
-            type={password}
+            onChange={handlePasswordChange}
+            value={password ?? ''}
+            type="password"
           />
           <div className={style.additions}>
             <Link to={PATH.PASSWORD_RECOVERY}>Forgot your password?</Link>
