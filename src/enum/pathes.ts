@@ -4,7 +4,7 @@ export enum PATH {
   PROFILE = '/profile',
   CONFIRM_PASSWORD = '/confirmPassword/*',
   POPUP = '/popup',
-  CREATE_NEW_PASSWORD = '/createNewPassword/:token',
+  PASSWORD_RECOVERY = '/passwordRecovery', // Token?
   PAGE_404 = '/*',
   CARDS = '/cards',
   CARD = '/card',
