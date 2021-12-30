@@ -1,12 +1,11 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import { appReducer } from './reducers/appReducer';
-import { registrationReducer } from './reducers/registrationReducer';
+import { appReducer, userAuthFormReducer } from 'store/reducers';
 
 export const rootReducer = combineReducers({
   app: appReducer,
-  registration: registrationReducer,
+  userAuthForm: userAuthFormReducer,
 });
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
