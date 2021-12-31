@@ -1,6 +1,7 @@
-import { FormEvent, memo, useCallback, useEffect } from 'react';
+import { FormEvent, memo, useCallback, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 import {
   setConfirmPasswordAC,
@@ -11,7 +12,7 @@ import {
 import style from './Registration.module.scss';
 
 import { CustomButton, CustomTextInput } from 'components';
-import { AutoCapitalize } from 'enum';
+import { AutoCapitalize, PATH } from 'enum';
 import { getConfirmPassword, getEmail, getPassword } from 'store';
 import { ReturnComponentType } from 'types';
 
@@ -22,6 +23,8 @@ export const Registration = memo((): ReturnComponentType => {
   const email = useSelector(getEmail);
   const password = useSelector(getPassword);
   const confirmPassword = useSelector(getConfirmPassword);
+
+  const [isRegistred, setIsRegistred] = useState<boolean>(false);
 
   useEffect(
     () =>
@@ -53,11 +56,17 @@ export const Registration = memo((): ReturnComponentType => {
       dispatch(setPasswordAC(null));
       dispatch(setConfirmPasswordAC(null));
       console.log('Редирект на логин');
+      setIsRegistred(true);
     }
     if (password !== confirmPassword) {
       console.log('Пароли не совпадают');
     }
   };
+
+  if (isRegistred) {
+    return <Navigate to={PATH.LOGIN} />;
+  }
+
   return (
     <div className={style.registrationForm}>
       <div className={style.container}>

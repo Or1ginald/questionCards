@@ -1,7 +1,7 @@
-import React, { FormEvent, memo, useCallback, useEffect } from 'react';
+import React, { FormEvent, memo, useCallback, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import { setEmailAC } from '../../store/reducers/userAuthFormReducer';
 
@@ -15,6 +15,8 @@ export const PasswordRecovery = memo(() => {
   const dispatch = useDispatch();
 
   const email = useSelector(getEmail);
+
+  const [isFormSent, setIsFormSent] = useState<boolean>(false);
 
   useEffect(
     () =>
@@ -34,7 +36,13 @@ export const PasswordRecovery = memo(() => {
 
     console.log('Отправил на сервер, санка');
     dispatch(setEmailAC(null));
+    setIsFormSent(true);
   };
+
+  if (isFormSent) {
+    return <Navigate to={PATH.LOGIN} />;
+  }
+
   return (
     <div className={style.passwordRecoveryForm}>
       <div className={style.container}>
