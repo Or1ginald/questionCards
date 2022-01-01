@@ -28,6 +28,7 @@
   color: var(--mainWhite);
   padding: 10px 20px;
   cursor: pointer;
+  text-align: center;
 }
 .container .current {
   border: var(--lightBlue) solid 1px;
