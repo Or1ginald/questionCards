@@ -17,8 +17,11 @@
       gap:1em;
       .additions {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-evenly;
         align-items: center;
+        input{
+          margin-right: .5em;
+        }
       }
       .signUpContainer {
         display: flex;

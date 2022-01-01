@@ -1,9 +1,14 @@
-import React, { FormEvent, memo, useCallback, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setEmailAC, setPasswordAC } from '../../store/reducers/userAuthFormReducer';
+import {
+  setEmailAC,
+  setPasswordAC,
+  setRememberMeAC,
+} from '../../store/reducers/userAuthFormReducer';
+import { setUserProfileDataTC } from '../../store/reducers/userReducer';
 
 import style from './Login.module.scss';
 
@@ -34,11 +39,14 @@ export const Login = memo(() => {
   const handlePasswordChange = useCallback((value: string) => {
     dispatch(setPasswordAC(value));
   }, []);
+  const onCheckBoxChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    dispatch(setRememberMeAC(e.currentTarget.checked));
+  };
 
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    console.log('Отправил на сервер, санка');
+    dispatch(setUserProfileDataTC());
     dispatch(setEmailAC(null));
     dispatch(setPasswordAC(null));
     console.log('Редирект на профаил');
@@ -63,6 +71,10 @@ export const Login = memo(() => {
             type="password"
           />
           <div className={style.additions}>
+            <div>
+              <input type="checkbox" onChange={onCheckBoxChange} />
+              <span>Remember Me</span>
+            </div>
             <Link to={PATH.PASSWORD_RECOVERY}>Forgot your password?</Link>
           </div>
           <div>

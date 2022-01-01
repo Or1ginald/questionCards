@@ -20,8 +20,11 @@
 }
 .loginForm .container .form .additions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   align-items: center;
+}
+.loginForm .container .form .additions input {
+  margin-right: 0.5em;
 }
 .loginForm .container .form .signUpContainer {
   display: flex;
