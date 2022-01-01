@@ -1,4 +1,9 @@
-import { Nullable } from 'types';
+import { Dispatch } from 'redux';
+
+import { setIsLoadingAC } from './appReducer';
+
+import { authApi } from 'api';
+import { AppThunk, Nullable } from 'types';
 
 const setUserProfileData = 'USER_REDUCER/SET_USER_PROFILE_DATA';
 
@@ -37,7 +42,7 @@ const userReducerInitialState = {
 export const userReducer = (
   state: userReducerInitialStateType = userReducerInitialState,
   action: userReducerActionsType,
-): any => {
+): userReducerInitialStateType => {
   switch (action.type) {
     case setUserProfileData:
       return { ...state, ...action.payload };
@@ -51,3 +56,11 @@ export const setUserProfileDataAC = (payload: any) =>
     type: setUserProfileData,
     payload,
   } as const);
+
+export const setUserProfileDataTC = (): AppThunk => (dispatch: Dispatch, getState) => {
+  const { email, password, rememberMe } = getState().userAuthForm;
+  dispatch(setIsLoadingAC(true));
+  authApi.login(email, password, rememberMe).then(res => {
+    dispatch(setUserProfileDataAC(res.data));
+  });
+};
