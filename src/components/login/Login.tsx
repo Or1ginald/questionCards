@@ -25,7 +25,6 @@ export const Login = memo(() => {
   useEffect(
     () =>
       function cleanup() {
-        console.log('cleanup');
         dispatch(setEmailAC(null));
         dispatch(setPasswordAC(null));
       },
@@ -33,7 +32,6 @@ export const Login = memo(() => {
   );
 
   const handleEmailChange = useCallback((value: string) => {
-    console.log('handler enter');
     dispatch(setEmailAC(value));
   }, []);
   const handlePasswordChange = useCallback((value: string) => {
