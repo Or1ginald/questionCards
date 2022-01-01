@@ -1,11 +1,18 @@
 import React, { ReactElement } from 'react';
 
 import './App.scss';
-import { Header, RoutesComponent } from 'components';
+import { useSelector } from 'react-redux';
 
-export const App = (): ReactElement => (
-  <div className="App">
-    <Header />
-    <RoutesComponent />
-  </div>
-);
+import { Snackbar, Header, RoutesComponent } from 'components';
+import { getError } from 'store';
+
+export const App = (): ReactElement => {
+  const error = useSelector(getError);
+  return (
+    <div className="App">
+      <Header />
+      <RoutesComponent />
+      {error && <Snackbar />}
+    </div>
+  );
+};
