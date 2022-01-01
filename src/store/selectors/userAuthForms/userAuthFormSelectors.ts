@@ -7,5 +7,3 @@ export const getPassword = (state: RootStateType): Nullable<string> =>
   state.userAuthForm.password;
 export const getConfirmPassword = (state: RootStateType): Nullable<string> =>
   state.userAuthForm.confirmPassword;
-export const getError = (state: RootStateType): Nullable<string> =>
-  state.userAuthForm.error;
