@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { setIsLoadingAC } from './appReducer';
+import { setErrorAC, setIsLoadingAC } from './appReducer';
 
 import { authApi } from 'api';
 import { AppThunk, Nullable } from 'types';
@@ -60,7 +60,11 @@ export const setUserProfileDataAC = (payload: any) =>
 export const setUserProfileDataTC = (): AppThunk => (dispatch: Dispatch, getState) => {
   const { email, password, rememberMe } = getState().userAuthForm;
   dispatch(setIsLoadingAC(true));
-  authApi.login(email, password, rememberMe).then(res => {
-    dispatch(setUserProfileDataAC(res.data));
-  });
+  authApi
+    .login(email, password, rememberMe)
+    .then(res => {
+      dispatch(setUserProfileDataAC(res.data));
+    })
+    .catch(e => dispatch(setErrorAC(e.response.data.error)))
+    .finally(() => dispatch(setIsLoadingAC(false)));
 };
