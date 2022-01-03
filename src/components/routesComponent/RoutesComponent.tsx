@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
@@ -6,8 +6,9 @@ import s from './RoutesComponent.module.scss';
 
 import { Login, PasswordRecovery, Profile, Registration } from 'components';
 import { PATH } from 'enum';
+import { ReturnComponentType } from 'types';
 
-export const RoutesComponent = memo(() => (
+export const RoutesComponent = (): ReturnComponentType => (
   <div className={s.container}>
     <Routes>
       <Route element={<Navigate to={PATH.PROFILE} />} path="/" />
@@ -17,4 +18,4 @@ export const RoutesComponent = memo(() => (
       <Route element={<PasswordRecovery />} path={PATH.PASSWORD_RECOVERY} />
     </Routes>
   </div>
-));
+);
