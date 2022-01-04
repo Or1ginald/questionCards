@@ -24,7 +24,7 @@ export const Registration = memo((): ReturnComponentType => {
   const password = useSelector(getPassword);
   const confirmPassword = useSelector(getConfirmPassword);
 
-  const [isRegistred, setIsRegistred] = useState<boolean>(false);
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
   useEffect(
     () =>
@@ -56,14 +56,14 @@ export const Registration = memo((): ReturnComponentType => {
       dispatch(setPasswordAC(null));
       dispatch(setConfirmPasswordAC(null));
       console.log('Редирект на логин');
-      setIsRegistred(true);
+      setIsRegistered(true);
     }
     if (password !== confirmPassword) {
       console.log('Пароли не совпадают');
     }
   };
 
-  if (isRegistred) {
+  if (isRegistered) {
     return <Navigate to={PATH.LOGIN} />;
   }
 
