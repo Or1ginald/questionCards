@@ -8,9 +8,12 @@ export type appReducerInitialStateType = {
 
 export const setIsLoading = 'APP/SET_IS_LOADING';
 export const setError = 'APP/SET_ERROR';
-export type appReducerActionsType = setIsLoadingACType | setErrorACType;
+export const setIsAuth = 'APP/SET_IS_AUTH';
+
+export type appReducerActionsType = setIsLoadingACType | setErrorACType | setIsAuthACType;
 export type setIsLoadingACType = ReturnType<typeof setIsLoadingAC>;
 export type setErrorACType = ReturnType<typeof setErrorAC>;
+export type setIsAuthACType = ReturnType<typeof setIsAuthAC>;
 
 export const appReducerInitState = {
   isLoading: false,
@@ -27,7 +30,8 @@ export const appReducer = (
       return { ...state, isLoading: action.isLoading };
     case setError:
       return { ...state, error: action.error };
-
+    case setIsAuth:
+      return { ...state, isAuth: action.isAuth };
     default:
       return state;
   }
@@ -42,4 +46,9 @@ export const setErrorAC = (error: Nullable<string>) =>
   ({
     type: setError,
     error,
+  } as const);
+export const setIsAuthAC = (isAuth: boolean) =>
+  ({
+    type: setIsAuth,
+    isAuth,
   } as const);
