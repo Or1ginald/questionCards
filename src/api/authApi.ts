@@ -35,4 +35,7 @@ export const authApi = {
       rememberMe,
     });
   },
+  authMe() {
+    return instance.post<any, AxiosResponse<loginResponseType>>('/auth/me');
+  },
 };

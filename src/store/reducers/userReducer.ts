@@ -68,3 +68,14 @@ export const setUserProfileDataTC = (): AppThunk => (dispatch: Dispatch, getStat
     .catch(e => dispatch(setErrorAC(e.response.data.error)))
     .finally(() => dispatch(setIsLoadingAC(false)));
 };
+export const authMeTC = (): AppThunk => (dispatch: Dispatch) => {
+  dispatch(setIsLoadingAC(true));
+  authApi
+    .authMe()
+    .then(res => {
+      console.log(res);
+      dispatch(setUserProfileDataAC(res.data));
+    })
+    .catch(e => dispatch(setErrorAC(e.response.data.error)))
+    .finally(() => dispatch(setIsLoadingAC(false)));
+};
