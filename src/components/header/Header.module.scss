@@ -25,6 +25,13 @@
     gap: 0.5em;
   }
 
+  .logout {
+    color: var(--mainWhite);
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+  }
+
   a {
     color: var(--mainWhite);
     padding: 10px 20px;

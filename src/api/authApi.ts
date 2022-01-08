@@ -20,6 +20,11 @@ export type loginResponseType = {
   error?: string;
 };
 
+export type logoutResponseType = {
+  info: string;
+  error: string;
+};
+
 export const authApi = {
   register(email: string, password: string): Promise<AxiosResponse> {
     return instance.post('/auth/register', { email, password });
@@ -37,5 +42,8 @@ export const authApi = {
   },
   authMe() {
     return instance.post<any, AxiosResponse<loginResponseType>>('/auth/me');
+  },
+  logout() {
+    return instance.delete<any, AxiosResponse<logoutResponseType>>('/auth/me');
   },
 };

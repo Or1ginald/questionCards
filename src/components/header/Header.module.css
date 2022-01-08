@@ -24,6 +24,12 @@
   justify-content: center;
   gap: 0.5em;
 }
+.container .logout {
+  color: var(--mainWhite);
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+}
 .container a {
   color: var(--mainWhite);
   padding: 10px 20px;

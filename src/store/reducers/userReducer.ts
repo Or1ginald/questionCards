@@ -1,11 +1,12 @@
 import { Dispatch } from 'redux';
 
-import { setErrorAC, setIsLoadingAC } from './appReducer';
+import { setErrorAC, setIsAuthAC, setIsLoadingAC } from './appReducer';
 
 import { authApi } from 'api';
 import { AppThunk, Nullable } from 'types';
 
 const setUserProfileData = 'USER_REDUCER/SET_USER_PROFILE_DATA';
+const setStateToDefault = 'USER_REDUCER/SET_STATE_TO_DEFAULT';
 
 export type userReducerInitialStateType = {
   _id: Nullable<string>;
@@ -21,9 +22,10 @@ export type userReducerInitialStateType = {
   error?: Nullable<string>;
 };
 
-export type userReducerActionsType = setUserProfileDataACType;
+export type userReducerActionsType = setUserProfileDataACType | setStateToDefaultACType;
 
 export type setUserProfileDataACType = ReturnType<typeof setUserProfileDataAC>;
+export type setStateToDefaultACType = ReturnType<typeof setStateToDefaultAC>;
 
 const userReducerInitialState = {
   _id: null,
@@ -46,6 +48,12 @@ export const userReducer = (
   switch (action.type) {
     case setUserProfileData:
       return { ...state, ...action.payload };
+    case setStateToDefault: {
+      const newState = { ...state };
+      // Object.keys(state).forEach(el => newState[el] === null);
+      Object.fromEntries(Object.entries(newState).map(([k]) => [k, null]));
+      return newState;
+    }
     default:
       return state;
   }
@@ -57,6 +65,11 @@ export const setUserProfileDataAC = (payload: any) =>
     payload,
   } as const);
 
+export const setStateToDefaultAC = () =>
+  ({
+    type: setStateToDefault,
+  } as const);
+
 export const setUserProfileDataTC = (): AppThunk => (dispatch: Dispatch, getState) => {
   const { email, password, rememberMe } = getState().userAuthForm;
   dispatch(setIsLoadingAC(true));
@@ -64,6 +77,7 @@ export const setUserProfileDataTC = (): AppThunk => (dispatch: Dispatch, getStat
     .login(email, password, rememberMe)
     .then(res => {
       dispatch(setUserProfileDataAC(res.data));
+      dispatch(setIsAuthAC(true));
     })
     .catch(e => dispatch(setErrorAC(e.response.data.error)))
     .finally(() => dispatch(setIsLoadingAC(false)));
@@ -75,7 +89,26 @@ export const authMeTC = (): AppThunk => (dispatch: Dispatch) => {
     .then(res => {
       console.log(res);
       dispatch(setUserProfileDataAC(res.data));
+      dispatch(setIsAuthAC(true));
     })
-    .catch(e => dispatch(setErrorAC(e.response.data.error)))
+    .catch(e => {
+      dispatch(setErrorAC(e.response.data.error));
+      dispatch(setIsAuthAC(false));
+    })
+    .finally(() => dispatch(setIsLoadingAC(false)));
+};
+export const logoutTC = (): AppThunk => (dispatch: Dispatch) => {
+  dispatch(setIsLoadingAC(true));
+  authApi
+    .logout()
+    .then(res => {
+      console.log(res);
+      dispatch(setStateToDefaultAC());
+      dispatch(setIsAuthAC(false));
+    })
+    .catch(e => {
+      dispatch(setErrorAC(e.response.data.error));
+      dispatch(setIsAuthAC(false));
+    })
     .finally(() => dispatch(setIsLoadingAC(false)));
 };
