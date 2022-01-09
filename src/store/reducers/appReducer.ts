@@ -17,7 +17,7 @@ export type setIsAuthACType = ReturnType<typeof setIsAuthAC>;
 
 export const appReducerInitState = {
   isLoading: false,
-  isAuth: true,
+  isAuth: false,
   error: null,
 };
 
