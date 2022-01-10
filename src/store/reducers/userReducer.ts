@@ -1,6 +1,11 @@
 import { Dispatch } from 'redux';
 
-import { setErrorAC, setIsAuthAC, setIsLoadingAC } from './appReducer';
+import {
+  setErrorAC,
+  setIsAuthAC,
+  setIsInitializedAC,
+  setIsLoadingAC,
+} from './appReducer';
 
 import { authApi } from 'api';
 import { AppThunk, Nullable } from 'types';
@@ -46,8 +51,9 @@ export const userReducer = (
   action: userReducerActionsType,
 ): userReducerInitialStateType => {
   switch (action.type) {
-    case setUserProfileData:
+    case setUserProfileData: {
       return { ...state, ...action.payload };
+    }
     case setStateToDefault: {
       const newState = { ...state };
       // Object.keys(state).forEach(el => newState[el] === null);
@@ -78,6 +84,7 @@ export const setUserProfileDataTC = (): AppThunk => (dispatch: Dispatch, getStat
     .then(res => {
       dispatch(setUserProfileDataAC(res.data));
       dispatch(setIsAuthAC(true));
+      dispatch(setIsInitializedAC(true));
     })
     .catch(e => dispatch(setErrorAC(e.response.data.error)))
     .finally(() => dispatch(setIsLoadingAC(false)));
@@ -87,13 +94,11 @@ export const authMeTC = (): AppThunk => (dispatch: Dispatch) => {
   authApi
     .authMe()
     .then(res => {
-      console.log(res);
       dispatch(setUserProfileDataAC(res.data));
       dispatch(setIsAuthAC(true));
     })
     .catch(e => {
       dispatch(setErrorAC(e.response.data.error));
-      dispatch(setIsAuthAC(false));
     })
     .finally(() => dispatch(setIsLoadingAC(false)));
 };
@@ -108,7 +113,6 @@ export const logoutTC = (): AppThunk => (dispatch: Dispatch) => {
     })
     .catch(e => {
       dispatch(setErrorAC(e.response.data.error));
-      dispatch(setIsAuthAC(false));
     })
     .finally(() => dispatch(setIsLoadingAC(false)));
 };

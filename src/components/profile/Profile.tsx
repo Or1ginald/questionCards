@@ -1,23 +1,57 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
-import { authMeTC } from '../../store/reducers/userReducer';
 import style from '../registration/Registration.module.scss';
 
-import { getUserAvatar, getUserEmail, getUserId, getUserName } from 'store';
+import { Spinner } from 'components';
+import { PATH } from 'enum';
+import {
+  getIsAuth,
+  getIsInitialized,
+  getIsLoading,
+  getUserAvatar,
+  getUserEmail,
+  getUserName,
+} from 'store';
+import { setErrorAC } from 'store/reducers/appReducer';
 
 export const Profile = memo(() => {
   const dispatch = useDispatch();
-  const userId = useSelector(getUserId);
+
+  const isAuth = useSelector(getIsAuth);
   const userName = useSelector(getUserName);
   const userEmail = useSelector(getUserEmail);
   const avatar = useSelector(getUserAvatar);
+  const isLoading = useSelector(getIsLoading);
+  const isInitialized = useSelector(getIsInitialized);
 
-  if (!userId) {
-    dispatch(authMeTC());
-    return <div>authMe req</div>;
+  useEffect(
+    () =>
+      function cleanup() {
+        dispatch(setErrorAC(null));
+      },
+    [],
+  );
+
+  if (!isInitialized) {
+    return <Spinner />;
+    // return <h1>HUI</h1>;
   }
+
+  if (!isAuth) {
+    return <Navigate to={PATH.LOGIN} />;
+  }
+
+  if (isLoading) {
+    return <Spinner />;
+    // return <h1>HUI</h1>;
+  }
+
+  // // eslint-disable-next-line no-debugger
+  // debugger;
+
   return (
     <div className={style.registrationForm}>
       <div className={style.container}>

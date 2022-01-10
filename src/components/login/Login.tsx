@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 import {
   setEmailAC,
@@ -14,13 +14,16 @@ import style from './Login.module.scss';
 
 import { CustomButton, CustomTextInput } from 'components';
 import { AutoCapitalize, PATH } from 'enum';
-import { getEmail, getPassword } from 'store';
+import { getEmail, getIsAuth, getPassword } from 'store';
 
 export const Login = memo(() => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const email = useSelector(getEmail);
   const password = useSelector(getPassword);
+  const isAuth = useSelector(getIsAuth);
+  // const isLoading = useSelector(getIsLoading);
 
   useEffect(
     () =>
@@ -48,7 +51,14 @@ export const Login = memo(() => {
     dispatch(setEmailAC(null));
     dispatch(setPasswordAC(null));
     console.log('Редирект на профаил');
+    navigate(PATH.PROFILE);
   };
+
+  console.log('login');
+
+  if (isAuth) {
+    return <Navigate to={PATH.PROFILE} />;
+  }
 
   return (
     <div className={style.loginForm}>
