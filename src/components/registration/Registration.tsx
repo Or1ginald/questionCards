@@ -1,4 +1,4 @@
-import { FormEvent, memo, useCallback, useEffect, useState } from 'react';
+import { FormEvent, memo, useCallback, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
@@ -8,23 +8,22 @@ import {
   setEmailAC,
   setPasswordAC,
 } from '../../store/reducers/userAuthFormReducer';
+import { registerTC } from '../../store/reducers/userReducer';
 
 import style from './Registration.module.scss';
 
 import { CustomButton, CustomTextInput } from 'components';
 import { AutoCapitalize, PATH } from 'enum';
-import { getConfirmPassword, getEmail, getPassword } from 'store';
+import { getConfirmPassword, getEmail, getIsRegistered, getPassword } from 'store';
 import { ReturnComponentType } from 'types';
 
 export const Registration = memo((): ReturnComponentType => {
-  console.log('rerender');
   const dispatch = useDispatch();
 
   const email = useSelector(getEmail);
   const password = useSelector(getPassword);
   const confirmPassword = useSelector(getConfirmPassword);
-
-  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  const isRegistered = useSelector(getIsRegistered);
 
   useEffect(
     () =>
@@ -38,7 +37,6 @@ export const Registration = memo((): ReturnComponentType => {
   );
 
   const handleEmailChange = useCallback((value: string) => {
-    console.log('handler enter');
     dispatch(setEmailAC(value));
   }, []);
   const handlePasswordChange = useCallback((value: string) => {
@@ -51,12 +49,10 @@ export const Registration = memo((): ReturnComponentType => {
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (password === confirmPassword) {
-      console.log('Отправил на сервер, санка');
+      dispatch(registerTC());
       dispatch(setEmailAC(null));
       dispatch(setPasswordAC(null));
       dispatch(setConfirmPasswordAC(null));
-      console.log('Редирект на логин');
-      setIsRegistered(true);
     }
     if (password !== confirmPassword) {
       console.log('Пароли не совпадают');

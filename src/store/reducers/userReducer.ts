@@ -6,6 +6,7 @@ import {
   setIsInitializedAC,
   setIsLoadingAC,
 } from './appReducer';
+import { setIsRegisteredAC } from './userAuthFormReducer';
 
 import { authApi } from 'api';
 import { AppThunk, Nullable } from 'types';
@@ -110,6 +111,22 @@ export const logoutTC = (): AppThunk => (dispatch: Dispatch) => {
       console.log(res);
       dispatch(setStateToDefaultAC());
       dispatch(setIsAuthAC(false));
+    })
+    .catch(e => {
+      dispatch(setErrorAC(e.response.data.error));
+    })
+    .finally(() => dispatch(setIsLoadingAC(false)));
+};
+export const registerTC = (): AppThunk => (dispatch: Dispatch, getState) => {
+  const email = getState().userAuthForm.email as string;
+  const password = getState().userAuthForm.password as string;
+  dispatch(setIsLoadingAC(true));
+  authApi
+    .register(email, password)
+    .then(() => {
+      dispatch(setIsRegisteredAC(true));
+      console.log('Registration success');
+      // dispatch(setStateToDefaultAC());
     })
     .catch(e => {
       dispatch(setErrorAC(e.response.data.error));

@@ -10,7 +10,7 @@ import { PATH } from 'enum';
 import {
   getIsAuth,
   getIsInitialized,
-  getIsLoading,
+  // getIsLoading,
   getUserAvatar,
   getUserEmail,
   getUserName,
@@ -24,7 +24,7 @@ export const Profile = memo(() => {
   const userName = useSelector(getUserName);
   const userEmail = useSelector(getUserEmail);
   const avatar = useSelector(getUserAvatar);
-  const isLoading = useSelector(getIsLoading);
+  // const isLoading = useSelector(getIsLoading);
   const isInitialized = useSelector(getIsInitialized);
 
   useEffect(
@@ -44,10 +44,10 @@ export const Profile = memo(() => {
     return <Navigate to={PATH.LOGIN} />;
   }
 
-  if (isLoading) {
-    return <Spinner />;
-    // return <h1>HUI</h1>;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  //   // return <h1>HUI</h1>;
+  // }
 
   // // eslint-disable-next-line no-debugger
   // debugger;

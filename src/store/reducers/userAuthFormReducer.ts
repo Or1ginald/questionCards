@@ -3,20 +3,20 @@ import { Nullable } from 'types';
 const setEmail = 'REGISTRATION/SET_EMAIL';
 const setPassword = 'REGISTRATION/SET_PASSWORD';
 const setConfirmPassword = 'REGISTRATION/SET_CONFIRM_PASSWORD';
-const setError = 'REGISTRATION/SET_ERROR';
+const setIsRegistered = 'REGISTRATION/SET_IS_REGISTERED';
 const setRememberMe = 'REGISTRATION/SET_REMEMBER_ME';
 
 export type userAuthFormReducerActionsType =
   | setEmailACType
   | setPasswordACType
   | setConfirmPasswordACType
-  | setErrorACType
+  | setIsRegisteredACType
   | setRememberMeACType;
 
 export type setEmailACType = ReturnType<typeof setEmailAC>;
 export type setPasswordACType = ReturnType<typeof setPasswordAC>;
 export type setConfirmPasswordACType = ReturnType<typeof setConfirmPasswordAC>;
-export type setErrorACType = ReturnType<typeof setErrorAC>;
+export type setIsRegisteredACType = ReturnType<typeof setIsRegisteredAC>;
 export type setRememberMeACType = ReturnType<typeof setRememberMeAC>;
 
 export type UserAuthFormInitStateType = {
@@ -24,7 +24,7 @@ export type UserAuthFormInitStateType = {
   password: Nullable<string>;
   confirmPassword: Nullable<string>;
   rememberMe: Nullable<boolean>;
-  error: Nullable<string>;
+  isRegistered: boolean;
 };
 
 export const userAuthFormReducerInitState = {
@@ -33,6 +33,7 @@ export const userAuthFormReducerInitState = {
   confirmPassword: null,
   rememberMe: null,
   error: null,
+  isRegistered: false,
 };
 
 export const userAuthFormReducer = (
@@ -48,8 +49,8 @@ export const userAuthFormReducer = (
       return { ...state, confirmPassword: action.confirmPassword };
     case setRememberMe:
       return { ...state, rememberMe: action.doRemember };
-    case setError:
-      return { ...state, error: action.error };
+    case setIsRegistered:
+      return { ...state, isRegistered: action.isRegistered };
     default:
       return state;
   }
@@ -75,8 +76,8 @@ export const setRememberMeAC = (doRemember: Nullable<boolean>) =>
     type: setRememberMe,
     doRemember,
   } as const);
-export const setErrorAC = (error: Nullable<string>) =>
+export const setIsRegisteredAC = (isRegistered: boolean) =>
   ({
-    type: setError,
-    error,
+    type: setIsRegistered,
+    isRegistered,
   } as const);

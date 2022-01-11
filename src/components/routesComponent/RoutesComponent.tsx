@@ -8,12 +8,10 @@ import { Login, PasswordRecovery, Profile, Registration } from 'components';
 import { PATH } from 'enum';
 import { ReturnComponentType } from 'types';
 
-export const RoutesComponent = memo(
-  (): ReturnComponentType => (
-    // const isLoading = useSelector(getIsLoading);
-    // if (isLoading) {
-    //   return <Spinner />;
-    // }
+export const RoutesComponent = memo((): ReturnComponentType => {
+  console.log('fff');
+
+  return (
     <div className={s.container}>
       <Routes>
         <Route element={<Navigate to={PATH.PROFILE} />} path="/" />
@@ -23,5 +21,5 @@ export const RoutesComponent = memo(
         <Route element={<PasswordRecovery />} path={PATH.PASSWORD_RECOVERY} />
       </Routes>
     </div>
-  ),
-);
+  );
+});
