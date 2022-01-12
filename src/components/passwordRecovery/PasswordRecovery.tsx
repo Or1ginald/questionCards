@@ -1,9 +1,10 @@
 import React, { FormEvent, memo, useCallback, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { setEmailAC } from '../../store/reducers/userAuthFormReducer';
+import { forgotPasswordTC } from '../../store/reducers/userReducer';
 
 import style from './PasswordRecovery.module.scss';
 
@@ -33,14 +34,13 @@ export const PasswordRecovery = memo(() => {
 
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-
-    console.log('Отправил на сервер, санка');
+    dispatch(forgotPasswordTC());
     dispatch(setEmailAC(null));
     setIsFormSent(true);
   };
 
   if (isFormSent) {
-    return <Navigate to={PATH.LOGIN} />;
+    // return <Navigate to={PATH.LOGIN} />;
   }
 
   return (

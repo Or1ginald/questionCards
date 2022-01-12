@@ -133,3 +133,18 @@ export const registerTC = (): AppThunk => (dispatch: Dispatch, getState) => {
     })
     .finally(() => dispatch(setIsLoadingAC(false)));
 };
+export const forgotPasswordTC = (): AppThunk => (dispatch: Dispatch, getState) => {
+  const email = getState().userAuthForm.email as string;
+  dispatch(setIsLoadingAC(true));
+  authApi
+    .forgotPassword(email)
+    .then(() => {
+      // dispatch(setIsRegisteredAC(true));
+      console.log('Mail was sent');
+      // dispatch(setStateToDefaultAC());
+    })
+    .catch(e => {
+      dispatch(setErrorAC(e.response.data.error));
+    })
+    .finally(() => dispatch(setIsLoadingAC(false)));
+};

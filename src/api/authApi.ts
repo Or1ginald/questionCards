@@ -1,10 +1,11 @@
 import { AxiosResponse } from 'axios';
 
 import { Nullable } from '../types';
+import { passwordRequestForm } from '../utils';
 
 import { instance } from './apiConfig';
 
-export type loginResponseType = {
+export type LoginResponseType = {
   _id: string;
   email: string;
   name: string;
@@ -20,7 +21,7 @@ export type loginResponseType = {
   error?: string;
 };
 
-export type logoutResponseType = {
+export type ResponseTypeModel = {
   info: string;
   error: string;
 };
@@ -34,16 +35,22 @@ export const authApi = {
     password: Nullable<string>,
     rememberMe: Nullable<boolean>,
   ) {
-    return instance.post<any, AxiosResponse<loginResponseType>>('/auth/login', {
+    return instance.post<any, AxiosResponse<LoginResponseType>>('/auth/login', {
       email,
       password,
       rememberMe,
     });
   },
   authMe() {
-    return instance.post<any, AxiosResponse<loginResponseType>>('/auth/me');
+    return instance.post<any, AxiosResponse<LoginResponseType>>('/auth/me');
   },
   logout() {
-    return instance.delete<any, AxiosResponse<logoutResponseType>>('/auth/me');
+    return instance.delete<any, AxiosResponse<ResponseTypeModel>>('/auth/me');
+  },
+  forgotPassword(userEmail: string) {
+    return instance.post<any, AxiosResponse<ResponseTypeModel>>(
+      '/auth/forgot',
+      passwordRequestForm(userEmail, 'GuessCards.com'),
+    );
   },
 };
