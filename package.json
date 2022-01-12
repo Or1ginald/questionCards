@@ -1,6 +1,6 @@
 {
   "name": "cards",
-  "homepage": "",
+  "homepage": "questionCards",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
