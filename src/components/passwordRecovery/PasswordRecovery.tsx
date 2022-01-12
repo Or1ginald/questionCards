@@ -61,7 +61,7 @@ export const PasswordRecovery = memo(() => {
           </div>
           <div className={style.signUpContainer}>
             <div>Remembered yor password?</div>
-            <Link to={PATH.REGISTRATION} className={style.signUpLink}>
+            <Link to={PATH.LOGIN} className={style.signUpLink}>
               Back to login
             </Link>
           </div>
