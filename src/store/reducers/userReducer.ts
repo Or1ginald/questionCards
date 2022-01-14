@@ -116,9 +116,7 @@ export const logoutTC = (): AppThunk => (dispatch: Dispatch) => {
       dispatch(setStateToDefaultAC());
       dispatch(setIsAuthAC(false));
     })
-    .catch(e => {
-      dispatch(setErrorAC(e.response.data.error));
-    })
+    .catch(e => dispatch(setErrorAC(e.response.data.error)))
     .finally(() => dispatch(setIsLoadingAC(false)));
 };
 export const registerTC = (): AppThunk => (dispatch: Dispatch, getState) => {
