@@ -1,6 +1,6 @@
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import style from '../registration/Registration.module.scss';
@@ -15,10 +15,9 @@ import {
   getUserEmail,
   getUserName,
 } from 'store';
-import { setErrorAC } from 'store/reducers/appReducer';
 
 export const Profile = memo(() => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const isAuth = useSelector(getIsAuth);
   const userName = useSelector(getUserName);
@@ -27,13 +26,13 @@ export const Profile = memo(() => {
   // const isLoading = useSelector(getIsLoading);
   const isInitialized = useSelector(getIsInitialized);
 
-  useEffect(
-    () =>
-      function cleanup() {
-        dispatch(setErrorAC(null));
-      },
-    [],
-  );
+  // useEffect(
+  //   () =>
+  //     function cleanup() {
+  //       dispatch(setErrorAC(null));
+  //     },
+  //   [],
+  // );
 
   if (!isInitialized) {
     return <Spinner />;
