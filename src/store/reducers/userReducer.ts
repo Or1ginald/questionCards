@@ -6,7 +6,11 @@ import {
   setIsInitializedAC,
   setIsLoadingAC,
 } from './appReducer';
-import { setIsRegisteredAC } from './userAuthFormReducer';
+import {
+  setConfirmPasswordAC,
+  setIsRegisteredAC,
+  setPasswordAC,
+} from './userAuthFormReducer';
 
 import { authApi } from 'api';
 import { AppThunk, Nullable } from 'types';
@@ -148,3 +152,24 @@ export const forgotPasswordTC = (): AppThunk => (dispatch: Dispatch, getState) =
     })
     .finally(() => dispatch(setIsLoadingAC(false)));
 };
+export const createNewPasswordTC =
+  (resetPasswordToken: string): AppThunk =>
+  (dispatch: Dispatch, getState) => {
+    const password = getState().userAuthForm.password as string;
+    dispatch(setIsLoadingAC(true));
+    authApi
+      .createNewPassword(password, resetPasswordToken)
+      .then(() => {
+        // dispatch(setIsRegisteredAC(true));
+        console.log('New password was created');
+        // dispatch(setStateToDefaultAC());
+      })
+      .catch(e => {
+        dispatch(setErrorAC(e.response.data.error));
+      })
+      .finally(() => {
+        dispatch(setPasswordAC(null));
+        dispatch(setConfirmPasswordAC(null));
+        dispatch(setIsLoadingAC(false));
+      });
+  };

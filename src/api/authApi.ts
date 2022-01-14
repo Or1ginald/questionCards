@@ -47,6 +47,12 @@ export const authApi = {
   logout() {
     return instance.delete<any, AxiosResponse<ResponseTypeModel>>('/auth/me');
   },
+  createNewPassword(password: string, resetPasswordToken: string) {
+    return instance.post<any, AxiosResponse<ResponseTypeModel>>(
+      '/auth/set-new-password',
+      { password, resetPasswordToken },
+    );
+  },
   forgotPassword(userEmail: string) {
     return instance.post<any, AxiosResponse<ResponseTypeModel>>(
       '/auth/forgot',

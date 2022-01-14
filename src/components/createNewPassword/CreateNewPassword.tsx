@@ -1,13 +1,13 @@
 import React, { FormEvent, memo, useCallback, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 
 import {
   setConfirmPasswordAC,
   setPasswordAC,
 } from '../../store/reducers/userAuthFormReducer';
-import { forgotPasswordTC } from '../../store/reducers/userReducer';
+import { createNewPasswordTC } from '../../store/reducers/userReducer';
 
 import style from './CreateNewPassword.module.scss';
 
@@ -17,6 +17,8 @@ import { getConfirmPassword, getPassword } from 'store';
 
 export const CreateNewPassword = memo(() => {
   const dispatch = useDispatch();
+  const params = useParams<'token'>();
+  const { token } = params as { token: string };
 
   const password = useSelector(getPassword);
   const confirmPassword = useSelector(getConfirmPassword);
@@ -42,14 +44,12 @@ export const CreateNewPassword = memo(() => {
 
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    dispatch(forgotPasswordTC());
-    dispatch(setPasswordAC(null));
-    dispatch(setConfirmPasswordAC(null));
+    dispatch(createNewPasswordTC(token));
     setIsFormSent(true);
   };
 
   if (isFormSent) {
-    // return <Navigate to={PATH.LOGIN} />;
+    return <Navigate to={PATH.LOGIN} />;
   }
 
   return (
