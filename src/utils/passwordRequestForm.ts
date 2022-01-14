@@ -23,7 +23,7 @@ export const passwordRequestForm = (
     >
       Password Recovery Link:
       <a
-        href="https://or1ginald.github.io/gameCards/#/createNewPassword/$token$"
+        href="https://or1ginald.github.io/questionCards/#/createNewPassword/$token$"
         >Click Here</a
       >`,
 });
