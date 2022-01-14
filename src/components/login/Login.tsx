@@ -48,8 +48,6 @@ export const Login = memo(() => {
     e.preventDefault();
 
     dispatch(setUserProfileDataTC());
-    dispatch(setEmailAC(null));
-    dispatch(setPasswordAC(null));
     console.log('Редирект на профаил');
     navigate(PATH.PROFILE);
   };
