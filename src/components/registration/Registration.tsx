@@ -3,12 +3,14 @@ import { FormEvent, memo, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import { setErrorAC } from '../../store/reducers/appReducer';
 import {
   setConfirmPasswordAC,
   setEmailAC,
   setPasswordAC,
 } from '../../store/reducers/userAuthFormReducer';
 import { registerTC } from '../../store/reducers/userReducer';
+import { isPasswordValid } from '../../utils';
 
 import style from './Registration.module.scss';
 
@@ -21,7 +23,7 @@ export const Registration = memo((): ReturnComponentType => {
   const dispatch = useDispatch();
 
   const email = useSelector(getEmail);
-  const password = useSelector(getPassword);
+  const password = useSelector(getPassword) as string;
   const confirmPassword = useSelector(getConfirmPassword);
   const isRegistered = useSelector(getIsRegistered);
 
@@ -48,15 +50,18 @@ export const Registration = memo((): ReturnComponentType => {
 
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      dispatch(registerTC());
-      dispatch(setEmailAC(null));
-      dispatch(setPasswordAC(null));
-      dispatch(setConfirmPasswordAC(null));
-    }
     if (password !== confirmPassword) {
-      console.log('Пароли не совпадают');
+      console.log(`Passwords aren't equal`);
+      dispatch(setErrorAC(`Passwords aren't equal`));
+      return;
     }
+    if (!isPasswordValid(password)) {
+      dispatch(setErrorAC('Not valid password'));
+    }
+    dispatch(registerTC());
+    dispatch(setEmailAC(null));
+    dispatch(setPasswordAC(null));
+    dispatch(setConfirmPasswordAC(null));
   };
 
   if (isRegistered) {
