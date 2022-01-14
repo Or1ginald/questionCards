@@ -3,11 +3,13 @@ import React, { FormEvent, memo, useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, useParams } from 'react-router-dom';
 
+import { setErrorAC } from '../../store/reducers/appReducer';
 import {
   setConfirmPasswordAC,
   setPasswordAC,
 } from '../../store/reducers/userAuthFormReducer';
 import { createNewPasswordTC } from '../../store/reducers/userReducer';
+import { isPasswordValid } from '../../utils';
 
 import style from './CreateNewPassword.module.scss';
 
@@ -20,7 +22,7 @@ export const CreateNewPassword = memo(() => {
   const params = useParams<'token'>();
   const { token } = params as { token: string };
 
-  const password = useSelector(getPassword);
+  const password = useSelector(getPassword) as string;
   const confirmPassword = useSelector(getConfirmPassword);
 
   const [isFormSent, setIsFormSent] = useState<boolean>(false);
@@ -44,6 +46,14 @@ export const CreateNewPassword = memo(() => {
 
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      console.log(`Passwords aren't equal`);
+      dispatch(setErrorAC(`Passwords aren't equal`));
+      return;
+    }
+    if (!isPasswordValid(password)) {
+      dispatch(setErrorAC('Not valid password'));
+    }
     dispatch(createNewPasswordTC(token));
     setIsFormSent(true);
   };
@@ -61,14 +71,14 @@ export const CreateNewPassword = memo(() => {
             placeholder="Password"
             value={password ?? ''}
             onChange={handlePasswordChange}
-            type="text"
+            type="password"
             autoCapitalize={AutoCapitalize.false}
           />
           <CustomTextInput
             placeholder="Confirm password"
             value={confirmPassword ?? ''}
             onChange={handleConfirmPasswordChange}
-            type="text"
+            type="password"
             autoCapitalize={AutoCapitalize.false}
           />
           <div className={style.additions}>
