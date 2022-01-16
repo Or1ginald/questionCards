@@ -5,6 +5,7 @@ import {
   setIsAuthAC,
   setIsInitializedAC,
   setIsLoadingAC,
+  setNotificationAC,
 } from './appReducer';
 import {
   setConfirmPasswordAC,
@@ -115,6 +116,7 @@ export const logoutTC = (): AppThunk => (dispatch: Dispatch) => {
       console.log(res);
       dispatch(setStateToDefaultAC());
       dispatch(setIsAuthAC(false));
+      dispatch(setNotificationAC('You have been successfully logged out!'));
     })
     .catch(e => dispatch(setErrorAC(e.response.data.error)))
     .finally(() => dispatch(setIsLoadingAC(false)));
@@ -127,7 +129,7 @@ export const registerTC = (): AppThunk => (dispatch: Dispatch, getState) => {
     .register(email, password)
     .then(() => {
       dispatch(setIsRegisteredAC(true));
-      console.log('Registration success');
+      dispatch(setNotificationAC('You have been registered!'));
       // dispatch(setStateToDefaultAC());
     })
     .catch(e => {
@@ -142,7 +144,7 @@ export const forgotPasswordTC = (): AppThunk => (dispatch: Dispatch, getState) =
     .forgotPassword(email)
     .then(() => {
       // dispatch(setIsRegisteredAC(true));
-      console.log('Mail was sent');
+      dispatch(setNotificationAC('Recovery mail was sent'));
       // dispatch(setStateToDefaultAC());
     })
     .catch(e => {
@@ -159,7 +161,7 @@ export const createNewPasswordTC =
       .createNewPassword(password, resetPasswordToken)
       .then(() => {
         // dispatch(setIsRegisteredAC(true));
-        console.log('New password was created');
+        dispatch(setNotificationAC('New password was created'));
         // dispatch(setStateToDefaultAC());
       })
       .catch(e => {

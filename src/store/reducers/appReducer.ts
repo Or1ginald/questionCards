@@ -11,28 +11,33 @@ export type appReducerInitialStateType = {
   isAuth: boolean;
   error: Nullable<string>;
   isInitialized: boolean;
+  notification: Nullable<string>;
 };
 
 export const setIsLoading = 'APP/SET_IS_LOADING';
 export const setError = 'APP/SET_ERROR';
 export const setIsAuth = 'APP/SET_IS_AUTH';
 export const setIsInitialized = 'APP/SET_IS_INITIALIZED';
+export const setNotification = 'APP/SET_NOTIFICATION';
 
 export type appReducerActionsType =
   | setIsLoadingACType
   | setErrorACType
   | setIsAuthACType
-  | setIsInitializedACType;
+  | setIsInitializedACType
+  | setNotificationACType;
 export type setIsLoadingACType = ReturnType<typeof setIsLoadingAC>;
 export type setErrorACType = ReturnType<typeof setErrorAC>;
 export type setIsAuthACType = ReturnType<typeof setIsAuthAC>;
 export type setIsInitializedACType = ReturnType<typeof setIsInitializedAC>;
+export type setNotificationACType = ReturnType<typeof setNotificationAC>;
 
 export const appReducerInitState = {
   isInitialized: false,
   isLoading: false,
   isAuth: false,
   error: null,
+  notification: null,
 };
 
 export const appReducer = (
@@ -48,6 +53,8 @@ export const appReducer = (
       return { ...state, isAuth: action.isAuth };
     case setIsInitialized:
       return { ...state, isInitialized: action.isInitialized };
+    case setNotification:
+      return { ...state, notification: action.notification };
     default:
       return state;
   }
@@ -72,6 +79,11 @@ export const setIsInitializedAC = (isInitialized: boolean) =>
   ({
     type: setIsInitialized,
     isInitialized,
+  } as const);
+export const setNotificationAC = (notification: Nullable<string>) =>
+  ({
+    type: setNotification,
+    notification,
   } as const);
 
 export const initializeTC = (): AppThunk => (dispatch: Dispatch) => {
