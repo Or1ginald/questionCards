@@ -1,0 +1,142 @@
+$breakpoint-alpha: 800px; // adjust to your needs
+
+
+.rwdTables {
+
+
+
+  tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr th {
+    background-color: darken(#34495e, 5%)
+  }
+
+  th {
+    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!
+
+    &.sort {
+      cursor: pointer;
+      &:hover{
+        color: #b8e9ff;
+        transition: 0.5s;
+      }
+
+      &:active {
+        color: lighten(#34495e, 5%);
+        transition: 0.1s;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    @media (min-width: $breakpoint-alpha) {
+      flex-direction: column;
+    }
+    @media (min-width: 850px) {
+      flex-direction: row;
+    }
+  }
+
+
+  td {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+
+    &:first-child {
+      padding-top: .5em;
+    }
+
+    &:last-child {
+      padding-bottom: .5em;
+    }
+
+    &:before {
+      content: attr(data-th) " "; // who knew you could do this? The internet, that's who.
+      font-weight: bold;
+
+      // optional stuff to make it look nicer
+      width: 4.5em; // magic number :( adjust according to your own content
+      display: inline-block;
+      // end options
+
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+  }
+
+
+  th, td {
+    text-align: left;
+    min-width: 200px;
+    @media (min-width: $breakpoint-alpha) {
+      min-width: 100px;
+      display: table-cell;
+      padding: .25em .5em;
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+
+// presentational styling
+
+@import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
+
+.box {
+  padding: 0 2em;
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: #444;
+  background: #eee;
+}
+
+
+.rwdTables {
+  border-spacing: 0px 2px;
+  background: #2b3c4e;
+  color: #fff;
+  border-radius: .4em;
+  overflow: hidden;
+  width: 100%;
+
+  tr {
+    background-color: #34495e;
+    border-color: lighten(#34495e, 10%);
+
+    &:hover {
+      background-color: darken(#34495e, 5%);
+    }
+
+    &:active {
+      background-color: #34495e
+    }
+  }
+
+
+  th, td {
+    margin: .5em 1em;
+    @media (min-width: $breakpoint-alpha) {
+      padding: 1em !important;
+    }
+  }
+
+  th, td:before {
+    color: #6abfde;
+  }
+}

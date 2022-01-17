@@ -1,0 +1,117 @@
+@import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
+.rwdTables tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.rwdTables tr th {
+  background-color: #2b3c4e;
+}
+.rwdTables th {
+  display: none;
+}
+.rwdTables th.sort {
+  cursor: pointer;
+}
+.rwdTables th.sort:hover {
+  color: #b8e9ff;
+  transition: 0.5s;
+}
+.rwdTables th.sort:active {
+  color: #3d566e;
+  transition: 0.1s;
+}
+.rwdTables .buttons {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+@media (min-width: 800px) {
+  .rwdTables .buttons {
+    flex-direction: column;
+  }
+}
+@media (min-width: 850px) {
+  .rwdTables .buttons {
+    flex-direction: row;
+  }
+}
+.rwdTables td {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+.rwdTables td:first-child {
+  padding-top: 0.5em;
+}
+.rwdTables td:last-child {
+  padding-bottom: 0.5em;
+}
+.rwdTables td:before {
+  content: attr(data-th) " ";
+  font-weight: bold;
+  width: 4.5em;
+  display: inline-block;
+}
+@media (min-width: 800px) {
+  .rwdTables td:before {
+    display: none;
+  }
+}
+.rwdTables th, .rwdTables td {
+  text-align: left;
+  min-width: 200px;
+}
+@media (min-width: 800px) {
+  .rwdTables th, .rwdTables td {
+    min-width: 100px;
+    display: table-cell;
+    padding: 0.25em 0.5em;
+  }
+  .rwdTables th:first-child, .rwdTables td:first-child {
+    padding-left: 0;
+  }
+  .rwdTables th:last-child, .rwdTables td:last-child {
+    padding-right: 0;
+  }
+}
+
+.box {
+  padding: 0 2em;
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: #444;
+  background: #eee;
+}
+
+.rwdTables {
+  border-spacing: 0px 2px;
+  background: #2b3c4e;
+  color: #fff;
+  border-radius: 0.4em;
+  overflow: hidden;
+  width: 100%;
+}
+.rwdTables tr {
+  background-color: #34495e;
+  border-color: #46637f;
+}
+.rwdTables tr:hover {
+  background-color: #2b3c4e;
+}
+.rwdTables tr:active {
+  background-color: #34495e;
+}
+.rwdTables th, .rwdTables td {
+  margin: 0.5em 1em;
+}
+@media (min-width: 800px) {
+  .rwdTables th, .rwdTables td {
+    padding: 1em !important;
+  }
+}
+.rwdTables th, .rwdTables td:before {
+  color: #6abfde;
+}
+
+/*# sourceMappingURL=Table.module.css.map */
