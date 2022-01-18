@@ -3,12 +3,18 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import { appReducer, userAuthFormReducer, userReducer } from 'store/reducers';
+import {
+  appReducer,
+  packsReducer,
+  userAuthFormReducer,
+  userReducer,
+} from 'store/reducers';
 
 export const rootReducer = combineReducers({
   app: appReducer,
   userAuthForm: userAuthFormReducer,
   user: userReducer,
+  packs: packsReducer,
 });
 
 const composeEnhancers =
