@@ -10,6 +10,7 @@ import {
   PasswordRecovery,
   Profile,
   Registration,
+  Table,
 } from 'components';
 import { PATH } from 'enum';
 import { ReturnComponentType } from 'types';
@@ -25,6 +26,7 @@ export const RoutesComponent = memo((): ReturnComponentType => {
         <Route element={<Profile />} path={PATH.PROFILE} />
         <Route element={<Registration />} path={PATH.REGISTRATION} />
         <Route element={<Login />} path={PATH.LOGIN} />
+        <Route element={<Table />} path={PATH.PACKS_LIST} />
         <Route element={<PasswordRecovery />} path={PATH.PASSWORD_RECOVERY} />
         <Route path={PATH.CREATE_NEW_PASSWORD} element={<CreateNewPassword />}>
           <Route path=":token" element={<CreateNewPassword />} />
