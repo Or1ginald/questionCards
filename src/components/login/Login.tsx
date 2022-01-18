@@ -12,9 +12,9 @@ import { setUserProfileDataTC } from '../../store/reducers/userReducer';
 
 import style from './Login.module.scss';
 
-import { CustomButton, CustomTextInput } from 'components';
+import { CustomButton, CustomTextInput, Spinner } from 'components';
 import { AutoCapitalize, PATH } from 'enum';
-import { getEmail, getIsAuth, getPassword } from 'store';
+import { getEmail, getIsAuth, getIsLoading, getPassword } from 'store';
 
 export const Login = memo(() => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export const Login = memo(() => {
   const email = useSelector(getEmail);
   const password = useSelector(getPassword);
   const isAuth = useSelector(getIsAuth);
-  // const isLoading = useSelector(getIsLoading);
+  const isLoading = useSelector(getIsLoading);
 
   useEffect(
     () =>
@@ -56,6 +56,10 @@ export const Login = memo(() => {
 
   if (isAuth) {
     return <Navigate to={PATH.PROFILE} />;
+  }
+
+  if (isLoading) {
+    return <Spinner />;
   }
 
   return (
