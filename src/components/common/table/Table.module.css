@@ -1,76 +1,76 @@
 @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
-.rwdTables tr {
+.table tr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 }
-.rwdTables tr th {
+.table tr th {
   background-color: #2b3c4e;
 }
-.rwdTables th {
+.table th {
   display: none;
 }
-.rwdTables th.sort {
+.table th.sort {
   cursor: pointer;
 }
-.rwdTables th.sort:hover {
+.table th.sort:hover {
   color: #b8e9ff;
   transition: 0.5s;
 }
-.rwdTables th.sort:active {
+.table th.sort:active {
   color: #3d566e;
   transition: 0.1s;
 }
-.rwdTables .buttons {
+.table .buttons {
   display: flex;
   width: 100%;
   justify-content: center;
 }
 @media (min-width: 800px) {
-  .rwdTables .buttons {
+  .table .buttons {
     flex-direction: column;
   }
 }
 @media (min-width: 850px) {
-  .rwdTables .buttons {
+  .table .buttons {
     flex-direction: row;
   }
 }
-.rwdTables td {
+.table td {
   display: block;
   text-align: center;
   cursor: pointer;
 }
-.rwdTables td:first-child {
+.table td:first-child {
   padding-top: 0.5em;
 }
-.rwdTables td:last-child {
+.table td:last-child {
   padding-bottom: 0.5em;
 }
-.rwdTables td:before {
+.table td:before {
   content: attr(data-th) " ";
   font-weight: bold;
   width: 4.5em;
   display: inline-block;
 }
 @media (min-width: 800px) {
-  .rwdTables td:before {
+  .table td:before {
     display: none;
   }
 }
-.rwdTables th, .rwdTables td {
+.table th, .table td {
   text-align: left;
   min-width: 200px;
 }
 @media (min-width: 800px) {
-  .rwdTables th, .rwdTables td {
+  .table th, .table td {
     min-width: 100px;
     display: table-cell;
     padding: 0.25em 0.5em;
   }
-  .rwdTables th:first-child, .rwdTables td:first-child {
+  .table th:first-child, .table td:first-child {
     padding-left: 0;
   }
-  .rwdTables th:last-child, .rwdTables td:last-child {
+  .table th:last-child, .table td:last-child {
     padding-right: 0;
   }
 }
@@ -84,7 +84,7 @@
   background: #eee;
 }
 
-.rwdTables {
+.table {
   border-spacing: 0px 2px;
   background: #2b3c4e;
   color: #fff;
@@ -92,25 +92,25 @@
   overflow: hidden;
   width: 100%;
 }
-.rwdTables tr {
+.table tr {
   background-color: #34495e;
   border-color: #46637f;
 }
-.rwdTables tr:hover {
+.table tr:hover {
   background-color: #2b3c4e;
 }
-.rwdTables tr:active {
+.table tr:active {
   background-color: #34495e;
 }
-.rwdTables th, .rwdTables td {
+.table th, .table td {
   margin: 0.5em 1em;
 }
 @media (min-width: 800px) {
-  .rwdTables th, .rwdTables td {
+  .table th, .table td {
     padding: 1em !important;
   }
 }
-.rwdTables th, .rwdTables td:before {
+.table th, .table td:before {
   color: #6abfde;
 }
 

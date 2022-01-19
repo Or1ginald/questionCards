@@ -1,7 +1,12 @@
 $breakpoint-alpha: 800px; // adjust to your needs
 
+//table, th, td {
+//  border: 1px solid black;
+//  border-collapse: collapse;
+//}
 
-.rwdTables {
+
+.table {
 
 
 
@@ -107,7 +112,7 @@ $breakpoint-alpha: 800px; // adjust to your needs
 }
 
 
-.rwdTables {
+.table {
   border-spacing: 0px 2px;
   background: #2b3c4e;
   color: #fff;
