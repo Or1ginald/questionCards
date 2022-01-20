@@ -16,7 +16,7 @@ export const Header = (): ReturnComponentType => {
         <Link to="/index">Logo</Link>
         <nav>
           <Link to="profile">Profile</Link>
-          <Link to="packs">Packs</Link>
+          <Link to="packsList">Packs</Link>
         </nav>
         {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
         <div className={style.logout} onClick={() => dispatch(logoutTC())}>
