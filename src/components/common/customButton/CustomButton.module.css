@@ -3,12 +3,16 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+  word-wrap: normal;
   padding: 1em;
   border-radius: 10px;
   transition: 0.3s;
 }
-.button:hover {
+.button:hover, .button :focus {
   background-color: #e5e5e5;
+  color: #2b6777;
+  box-shadow: 0 0.5em 0.5em -0.4em #2b6777;
+  transform: translateY(-0.25em);
 }
 
 /*# sourceMappingURL=CustomButton.module.css.map */

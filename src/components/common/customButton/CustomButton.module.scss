@@ -1,12 +1,22 @@
 .button {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    padding: 1em;
-    border-radius: 10px;
-    transition: 0.3s;
-    &:hover{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  word-wrap: normal;
+  padding: 1em;
+  border-radius: 10px;
+  transition: 0.3s;
+
+  &:hover, :focus {
     background-color: #e5e5e5;
-    }
+    color: #2b6777;
+    box-shadow: 0 0.5em 0.5em -0.4em #2b6777;
+    transform: translateY(-0.25em);
+  }
 }
+//.raise:hover,
+//.raise:focus {
+//  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+//  transform: translateY(-0.25em);
+//}
