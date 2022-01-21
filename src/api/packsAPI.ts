@@ -25,4 +25,9 @@ export const packsAPI = {
       },
     });
   },
+  addPack(name: string) {
+    return instance.post('/cards/pack', {
+      cardsPack: { name },
+    });
+  },
 };

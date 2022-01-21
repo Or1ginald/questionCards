@@ -118,6 +118,28 @@ export const setPacksTC = (): AppThunk => (dispatch: Dispatch, getState) => {
       dispatch(setIsLoadingAC(false));
     });
 };
+export const addPackTC =
+  (name: string, closeModal: () => void): AppThunk =>
+  (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC(true));
+    packsAPI
+      .addPack(name)
+      .then(res => {
+        console.log(res.data);
+        closeModal();
+      })
+      .catch((e: AxiosError) => {
+        console.log(e.message);
+        // const errorNetwork = e.response
+        //   ? e.response.data.error
+        //   : `${e.message}, more details in the console`;
+        // // dispatch(setErrorMessageNetworkAC(errorNetwork));
+      })
+      .finally(() => {
+        dispatch(setIsLoadingAC(false));
+      });
+  };
+
 /* export const setMyDecksTC = (): AppThunk => (dispatch: Dispatch, getState) => {
     const {page, pageCount} = getState().decks;
     const {_id} = getState().profilePage.profile;
