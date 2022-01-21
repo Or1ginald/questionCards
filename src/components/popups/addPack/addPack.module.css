@@ -1,0 +1,13 @@
+.addPack {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+}
+.addPack .buttonsContainer {
+  display: flex;
+  gap: 1em;
+}
+
+/*# sourceMappingURL=addPack.module.css.map */
