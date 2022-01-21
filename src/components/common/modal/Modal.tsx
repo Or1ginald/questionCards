@@ -18,11 +18,6 @@ export const Modal = (props: ModalPropsType): ReturnComponentType => {
   const onExitClick = (): void => {
     setIsActive(false);
   };
-  // const onEscapePress = (e: KeyboardEvent<HTMLDivElement>): void => {
-  //   if (e.key === 'Escape') {
-  //     setIsActive(false);
-  //   }
-  // };
 
   useEffect(() => {
     const close = (e: KeyboardEvent): void => {

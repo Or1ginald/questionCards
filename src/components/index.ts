@@ -5,4 +5,7 @@ export { RoutesComponent } from './routesComponent';
 export { Login } from './login';
 export { PasswordRecovery } from './passwordRecovery';
 export { CreateNewPassword } from './createNewPassword';
+export { TableSidebar } from './tableSidebar';
+export * from './popups';
+export { TableNav } from './tableNav';
 export * from './common';
