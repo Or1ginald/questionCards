@@ -21,4 +21,5 @@ export type CardPackType = {
   updated?: string;
   __v?: number;
   user_name?: string;
+  more_id?: string;
 };
