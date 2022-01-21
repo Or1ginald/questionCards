@@ -1,5 +1,9 @@
 import React from 'react';
 
+import Tippy from '@tippyjs/react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'tippy.js/dist/tippy.css'; // optional
+
 import s from './CustomButton.module.scss';
 
 type ButtonPropsType = {
@@ -17,8 +21,15 @@ export const CustomButton = React.memo((props: ButtonPropsType) => {
     }
   };
   return (
-    <button className={s.button} onClick={onButtonClick} disabled={disabled} type={type}>
-      {title}
-    </button>
+    <Tippy content={title} theme="material">
+      <button
+        className={s.button}
+        onClick={onButtonClick}
+        disabled={disabled}
+        type={type}
+      >
+        {title}
+      </button>
+    </Tippy>
   );
 });
