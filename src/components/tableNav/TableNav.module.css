@@ -1,0 +1,10 @@
+.tableNav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 2em;
+}
+.tableNav button {
+  max-width: 10em;
+}
+
+/*# sourceMappingURL=TableNav.module.css.map */
