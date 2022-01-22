@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Tippy from '@tippyjs/react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import 'tippy.js/dist/tippy.css'; // optional
 
 import s from './CustomButton.module.scss';
@@ -11,10 +10,11 @@ type ButtonPropsType = {
   onClick?: () => void;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset' | undefined;
+  children?: React.ReactNode;
 };
 
 export const CustomButton = React.memo((props: ButtonPropsType) => {
-  const { onClick, title, disabled, type } = props;
+  const { onClick, title, disabled, type, children } = props;
   const onButtonClick = (): void => {
     if (onClick) {
       onClick();
@@ -28,7 +28,7 @@ export const CustomButton = React.memo((props: ButtonPropsType) => {
         disabled={disabled}
         type={type}
       >
-        {title}
+        {children ?? title}
       </button>
     </Tippy>
   );
