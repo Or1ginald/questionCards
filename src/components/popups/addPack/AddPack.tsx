@@ -20,6 +20,12 @@ export const AddPack = memo((props: AddPackPropsType) => {
 
   const onAddButtonClick = (): void => {
     dispatch(addPackTC(packName, handleModalClose));
+    setPackName('');
+  };
+
+  const onCancelButtonClick = (): void => {
+    setPackName('');
+    handleModalClose();
   };
 
   return (
@@ -32,7 +38,7 @@ export const AddPack = memo((props: AddPackPropsType) => {
         value={packName}
       />
       <div className={st.buttonsContainer}>
-        <CustomButton title="Cancel" onClick={handleModalClose} />
+        <CustomButton title="Cancel" onClick={onCancelButtonClick} />
         <CustomButton title="Add" onClick={onAddButtonClick} />
       </div>
     </div>
