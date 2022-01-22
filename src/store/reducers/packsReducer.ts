@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
 
-import { setIsLoadingAC } from './appReducer';
+import { setIsLoadingAC, setNotificationAC } from './appReducer';
 
 import { packsAPI } from 'api';
 import { ResponsePacksType } from 'api/types';
@@ -12,11 +12,13 @@ const FETCH_PACKS = 'PACKS/FETCH_PACKS';
 const REMOVE_PACK = 'PACKS/REMOVE_PACK';
 const ADD_PACK = 'PACKS/ADD_PACK';
 const UPDATE_PACK = 'PACKS/UPDATE_PACK';
+const SET_WAS_TABLE_CHANGED = 'PACKS/SET_WAS_TABLE_CHANGED';
 
 export type packsReducerInitStateType = ResponsePacksType & {
   packName: string;
   sortPacks: string;
   user_id: string;
+  wasTableChanged: boolean;
 };
 
 const packsReducerInitialState: packsReducerInitStateType = {
@@ -29,6 +31,7 @@ const packsReducerInitialState: packsReducerInitStateType = {
   packName: '',
   sortPacks: '0updated',
   user_id: '',
+  wasTableChanged: false,
 };
 
 export const packsReducer = (
@@ -54,6 +57,8 @@ export const packsReducer = (
       };
     case SET_CURRENT_PAGE:
       return { ...state, page: action.pageNumber };
+    case SET_WAS_TABLE_CHANGED:
+      return { ...state, wasTableChanged: action.isChanged };
     default:
       return state;
   }
@@ -87,12 +92,18 @@ export const setCurrentPageAC = (pageNumber: number) =>
     type: SET_CURRENT_PAGE,
     pageNumber,
   } as const);
+export const setWasTableChangedAC = (isChanged: boolean) =>
+  ({
+    type: SET_WAS_TABLE_CHANGED,
+    isChanged,
+  } as const);
 
 type ActionsType =
   | ReturnType<typeof fetchPacksAC>
   | ReturnType<typeof deletePackAC>
   | ReturnType<typeof addPackAC>
   | ReturnType<typeof upDatePackAC>
+  | ReturnType<typeof setWasTableChangedAC>
   | ReturnType<typeof setCurrentPageAC>;
 
 // thunk
@@ -127,6 +138,35 @@ export const addPackTC =
       .then(res => {
         console.log(res.data);
         closeModal();
+      })
+      .then(() => {
+        // @ts-ignore
+        dispatch(setPacksTC());
+        dispatch(setNotificationAC('Pack was added'));
+      })
+      .catch((e: AxiosError) => {
+        console.log(e.message);
+        // const errorNetwork = e.response
+        //   ? e.response.data.error
+        //   : `${e.message}, more details in the console`;
+        // // dispatch(setErrorMessageNetworkAC(errorNetwork));
+      })
+      .finally(() => {
+        dispatch(setIsLoadingAC(false));
+      });
+  };
+export const deletePackTC =
+  (packId: string): AppThunk =>
+  dispatch => {
+    dispatch(setIsLoadingAC(true));
+    packsAPI
+      .deletePack(packId)
+      .then(res => {
+        console.log(res.data);
+      })
+      .then(() => {
+        dispatch(setPacksTC());
+        dispatch(setNotificationAC('Pack was deleted'));
       })
       .catch((e: AxiosError) => {
         console.log(e.message);

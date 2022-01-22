@@ -8,6 +8,8 @@ export const getCardPacks = (state: RootStateType): Array<CardPackType> =>
 export const getPage = (state: RootStateType): number => state.packs.page;
 export const getSortPacks = (state: RootStateType): string => state.packs.sortPacks;
 export const getPackName = (state: RootStateType): string => state.packs.packName;
+export const getWasTableChanged = (state: RootStateType): boolean =>
+  state.packs.wasTableChanged;
 export const getMaxCardsCount = (state: RootStateType): number =>
   state.packs.maxCardsCount;
 export const getMinCardsCount = (state: RootStateType): number =>

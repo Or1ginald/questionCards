@@ -30,4 +30,12 @@ export const packsAPI = {
       cardsPack: { name },
     });
   },
+  deletePack(packId: string) {
+    return instance.delete('/cards/pack', { params: { id: packId } });
+  },
+  updatePack(packId: string, newName: string) {
+    return instance.put('/cards/pack', {
+      cardsPack: { _id: packId, name: newName },
+    });
+  },
 };
