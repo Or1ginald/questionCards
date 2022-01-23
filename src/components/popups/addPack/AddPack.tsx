@@ -1,7 +1,8 @@
 import React, { memo, useState } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getIsLoading } from '../../../store';
 import { addPackTC } from '../../../store/reducers/packsReducer';
 
 import st from './addPack.module.scss';
@@ -17,6 +18,8 @@ export const AddPack = memo((props: AddPackPropsType) => {
   const dispatch = useDispatch();
 
   const [packName, setPackName] = useState('');
+
+  const isLoading = useSelector(getIsLoading);
 
   const onAddButtonClick = (): void => {
     dispatch(addPackTC(packName, handleModalClose));
@@ -38,8 +41,8 @@ export const AddPack = memo((props: AddPackPropsType) => {
         value={packName}
       />
       <div className={st.buttonsContainer}>
-        <CustomButton title="Cancel" onClick={onCancelButtonClick} />
-        <CustomButton title="Add" onClick={onAddButtonClick} />
+        <CustomButton title="Cancel" onClick={onCancelButtonClick} disabled={isLoading} />
+        <CustomButton title="Add" onClick={onAddButtonClick} disabled={isLoading} />
       </div>
     </div>
   );
