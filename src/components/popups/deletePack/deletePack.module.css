@@ -1,0 +1,13 @@
+.deletePack {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+}
+.deletePack .buttonsContainer {
+  display: flex;
+  gap: 1em;
+}
+
+/*# sourceMappingURL=deletePack.module.css.map */
