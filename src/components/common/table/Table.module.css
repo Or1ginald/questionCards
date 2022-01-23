@@ -1,10 +1,24 @@
 @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
+.table {
+  table-layout: fixed;
+  width: 100%;
+}
 .table tr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 }
 .table tr th {
   background-color: #2b3c4e;
+  word-wrap: break-word;
+}
+.table .flexCell {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5em;
+}
+.table .flexCell button {
+  max-width: 60%;
 }
 .table th {
   display: none;
@@ -39,6 +53,7 @@
   display: block;
   text-align: center;
   cursor: pointer;
+  word-wrap: break-word;
 }
 .table td:first-child {
   padding-top: 0.5em;

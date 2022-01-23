@@ -8,7 +8,8 @@ $breakpoint-alpha: 800px; // adjust to your needs
 
 .table {
 
-
+  table-layout: fixed;
+  width: 100%;
 
   tr {
     border-top: 1px solid #ddd;
@@ -16,7 +17,20 @@ $breakpoint-alpha: 800px; // adjust to your needs
   }
 
   tr th {
-    background-color: darken(#34495e, 5%)
+    background-color: darken(#34495e, 5%);
+    word-wrap: break-word;
+  }
+
+  .flexCell{
+    display: flex;
+    //justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.5em;
+    //flex-wrap: wrap;
+    button{
+      max-width: 60%;
+    }
   }
 
   th {
@@ -54,6 +68,7 @@ $breakpoint-alpha: 800px; // adjust to your needs
     display: block;
     text-align: center;
     cursor: pointer;
+    word-wrap: break-word;
 
     &:first-child {
       padding-top: .5em;
