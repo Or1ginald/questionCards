@@ -131,7 +131,7 @@ export const setPacksTC = (): AppThunk => (dispatch: Dispatch, getState) => {
 };
 export const addPackTC =
   (name: string, closeModal: () => void): AppThunk =>
-  (dispatch: Dispatch) => {
+  dispatch => {
     dispatch(setIsLoadingAC(true));
     packsAPI
       .addPack(name)
@@ -156,7 +156,7 @@ export const addPackTC =
       });
   };
 export const deletePackTC =
-  (packId: string): AppThunk =>
+  (packId: string, closeModal: () => void): AppThunk =>
   dispatch => {
     dispatch(setIsLoadingAC(true));
     packsAPI
@@ -167,6 +167,32 @@ export const deletePackTC =
       .then(() => {
         dispatch(setPacksTC());
         dispatch(setNotificationAC('Pack was deleted'));
+      })
+      .catch((e: AxiosError) => {
+        console.log(e.message);
+        // const errorNetwork = e.response
+        //   ? e.response.data.error
+        //   : `${e.message}, more details in the console`;
+        // // dispatch(setErrorMessageNetworkAC(errorNetwork));
+      })
+      .finally(() => {
+        closeModal();
+        dispatch(setIsLoadingAC(false));
+      });
+  };
+export const updatePackTC =
+  (packId: string, newName: string, closeModal: () => void): AppThunk =>
+  dispatch => {
+    dispatch(setIsLoadingAC(true));
+    packsAPI
+      .updatePack(packId, newName)
+      .then(res => {
+        console.log(res.data);
+        closeModal();
+      })
+      .then(() => {
+        dispatch(setPacksTC());
+        dispatch(setNotificationAC('Pack was updated'));
       })
       .catch((e: AxiosError) => {
         console.log(e.message);
