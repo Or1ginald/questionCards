@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, KeyboardEvent } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -31,6 +31,12 @@ export const AddPack = memo((props: AddPackPropsType) => {
     handleModalClose();
   };
 
+  const onEnterKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Enter') {
+      onAddButtonClick();
+    }
+  };
+
   return (
     <div className={st.addPack}>
       <h1>Create new Pack</h1>
@@ -39,6 +45,7 @@ export const AddPack = memo((props: AddPackPropsType) => {
         type="text"
         onChange={setPackName}
         value={packName}
+        onKeyPress={onEnterKeyPress}
       />
       <div className={st.buttonsContainer}>
         <CustomButton title="Cancel" onClick={onCancelButtonClick} disabled={isLoading} />
