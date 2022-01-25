@@ -1,4 +1,4 @@
-import { ChangeEvent, memo } from 'react';
+import { ChangeEvent, memo, KeyboardEvent } from 'react';
 
 import s from './CustomTextInput.module.scss';
 
@@ -12,17 +12,33 @@ type InputProps = {
   onChange: (value: string) => void;
   value: string;
   name?: string;
+  onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void;
   autoCapitalize?: AutoCapitalize.true | AutoCapitalize.false;
 };
 
 export const CustomTextInput = memo((props: InputProps): ReturnComponentType => {
-  const { placeholder, type, className, value, onChange, name, autoCapitalize } = props;
+  const {
+    placeholder,
+    type,
+    className,
+    value,
+    onChange,
+    name,
+    autoCapitalize,
+    onKeyPress,
+  } = props;
   const onInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     onChange(e.currentTarget.value);
+  };
+  const onInputKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
+    if (onKeyPress) {
+      onKeyPress(e);
+    }
   };
   return (
     <div className={s.inputWrap}>
       <input
+        onKeyPress={onInputKeyPress}
         size={40}
         type={type}
         name={name}
