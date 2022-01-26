@@ -1,11 +1,4 @@
-import { AxiosError } from 'axios';
-import { Dispatch } from 'redux';
-
-import { setIsLoadingAC, setNotificationAC } from './appReducer';
-
-import { packsAPI } from 'api';
 import { ResponsePacksType } from 'api/types';
-import { AppThunk } from 'types';
 
 const SET_CURRENT_PAGE = 'PACKS/SET_CURRENT_PAGE';
 const FETCH_PACKS = 'PACKS/FETCH_PACKS';
@@ -107,104 +100,6 @@ type ActionsType =
   | ReturnType<typeof setCurrentPageAC>;
 
 // thunk
-
-export const setPacksTC = (): AppThunk => (dispatch: Dispatch, getState) => {
-  const { page, pageCount, maxCardsCount, minCardsCount, packName, sortPacks, user_id } =
-    getState().packs;
-  dispatch(setIsLoadingAC(true));
-  packsAPI
-    .getPacks(packName, minCardsCount, maxCardsCount, sortPacks, page, pageCount, user_id)
-    .then(res => {
-      console.log(res.data);
-      dispatch(fetchPacksAC(res.data));
-    })
-    .catch((e: AxiosError) => {
-      console.log(e.message);
-      // const errorNetwork = e.response
-      //   ? e.response.data.error
-      //   : `${e.message}, more details in the console`;
-      // // dispatch(setErrorMessageNetworkAC(errorNetwork));
-    })
-    .finally(() => {
-      dispatch(setIsLoadingAC(false));
-    });
-};
-export const addPackTC =
-  (name: string, closeModal: () => void): AppThunk =>
-  dispatch => {
-    dispatch(setIsLoadingAC(true));
-    packsAPI
-      .addPack(name)
-      .then(res => {
-        console.log(res.data);
-        closeModal();
-      })
-      .then(() => {
-        // @ts-ignore
-        dispatch(setPacksTC());
-        dispatch(setNotificationAC('Pack was added'));
-      })
-      .catch((e: AxiosError) => {
-        console.log(e.message);
-        // const errorNetwork = e.response
-        //   ? e.response.data.error
-        //   : `${e.message}, more details in the console`;
-        // // dispatch(setErrorMessageNetworkAC(errorNetwork));
-      })
-      .finally(() => {
-        dispatch(setIsLoadingAC(false));
-      });
-  };
-export const deletePackTC =
-  (packId: string, closeModal: () => void): AppThunk =>
-  dispatch => {
-    dispatch(setIsLoadingAC(true));
-    packsAPI
-      .deletePack(packId)
-      .then(res => {
-        console.log(res.data);
-      })
-      .then(() => {
-        dispatch(setPacksTC());
-        dispatch(setNotificationAC('Pack was deleted'));
-      })
-      .catch((e: AxiosError) => {
-        console.log(e.message);
-        // const errorNetwork = e.response
-        //   ? e.response.data.error
-        //   : `${e.message}, more details in the console`;
-        // // dispatch(setErrorMessageNetworkAC(errorNetwork));
-      })
-      .finally(() => {
-        closeModal();
-        dispatch(setIsLoadingAC(false));
-      });
-  };
-export const updatePackTC =
-  (packId: string, newName: string, closeModal: () => void): AppThunk =>
-  dispatch => {
-    dispatch(setIsLoadingAC(true));
-    packsAPI
-      .updatePack(packId, newName)
-      .then(res => {
-        console.log(res.data);
-        closeModal();
-      })
-      .then(() => {
-        dispatch(setPacksTC());
-        dispatch(setNotificationAC('Pack was updated'));
-      })
-      .catch((e: AxiosError) => {
-        console.log(e.message);
-        // const errorNetwork = e.response
-        //   ? e.response.data.error
-        //   : `${e.message}, more details in the console`;
-        // // dispatch(setErrorMessageNetworkAC(errorNetwork));
-      })
-      .finally(() => {
-        dispatch(setIsLoadingAC(false));
-      });
-  };
 
 /* export const setMyDecksTC = (): AppThunk => (dispatch: Dispatch, getState) => {
     const {page, pageCount} = getState().decks;

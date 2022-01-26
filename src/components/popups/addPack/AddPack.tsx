@@ -3,11 +3,11 @@ import React, { memo, useState, KeyboardEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getIsLoading } from '../../../store';
-import { addPackTC } from '../../../store/reducers/packsReducer';
 
 import st from './addPack.module.scss';
 
 import { CustomButton, CustomTextInput } from 'components';
+import { addPackTC } from 'store/middlewares';
 
 type AddPackPropsType = {
   handleModalClose: () => void;

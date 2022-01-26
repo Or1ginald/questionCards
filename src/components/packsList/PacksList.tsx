@@ -3,16 +3,11 @@ import React, { KeyboardEvent, memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import {
-  deletePackTC,
-  setPacksTC,
-  updatePackTC,
-} from '../../store/reducers/packsReducer';
-
 import style from './PacksList.module.scss';
 
 import { TableSidebar, Table, TableNav, Modal, DeletePack, UpdatePack } from 'components';
 import { PATH } from 'enum';
+import { deletePackTC, setPacksTC, updatePackTC } from 'store/middlewares';
 import { getCardPacks, getIsAuth } from 'store/selectors';
 
 export const PacksList = memo(() => {

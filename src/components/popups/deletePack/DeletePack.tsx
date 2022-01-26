@@ -7,12 +7,12 @@ import st from './deletePack.module.scss';
 import { CustomButton } from 'components';
 import { getIsLoading } from 'store/selectors';
 
-type AddPackPropsType = {
+type DeletePackPropsType = {
   handleModalClose: () => void;
   onDeleteButtonClick: () => void;
 };
 
-export const DeletePack = memo((props: AddPackPropsType) => {
+export const DeletePack = memo((props: DeletePackPropsType) => {
   const { handleModalClose, onDeleteButtonClick } = props;
 
   const isLoading = useSelector(getIsLoading);
@@ -28,7 +28,7 @@ export const DeletePack = memo((props: AddPackPropsType) => {
       <h1>Are you sure?</h1>
       <div className={st.buttonsContainer}>
         <CustomButton title="Cancel" onClick={onCancelButtonClick} disabled={isLoading} />
-        <CustomButton title="Add" onClick={onDeleteButtonClick} disabled={isLoading} />
+        <CustomButton title="Delete" onClick={onDeleteButtonClick} disabled={isLoading} />
       </div>
     </div>
   );
