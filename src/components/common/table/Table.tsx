@@ -5,6 +5,7 @@ import s from './Table.module.scss';
 import { CardPackType } from 'api/types';
 import { TableButtons } from 'components';
 import { ARRAY_FIRST_ELEMENT, ARRAY_ZERO_ELEMENT } from 'constants/base';
+import { normalizeDate } from 'utils';
 
 type TablePropsType = {
   cardPacks: CardPackType[];
@@ -50,7 +51,7 @@ export const Table = memo((props: TablePropsType) => {
           <tr key={el._id}>
             <td>{el.name}</td>
             <td>{el.cardsCount}</td>
-            <td>{el.updated}</td>
+            <td>{normalizeDate(el.updated as string)}</td>
             <td>{el.user_name}</td>
             <td className={s.flexCell}>
               <TableButtons
