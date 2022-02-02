@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/jsx-key */
+/* eslint-disable react/jsx-key */ /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
 import React from 'react';
 
 import './Pagination.module.scss';
@@ -43,7 +44,6 @@ export const Pagination = (props: PaginationPropsType): ReturnComponentType => {
 
   return (
     <ul className="pagination-container">
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <li className={ulClassName} onClick={onPrevious}>
         <div className="arrow left" />
       </li>
