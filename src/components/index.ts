@@ -9,4 +9,5 @@ export { TableSidebar } from './tableSidebar';
 export * from './popups';
 export { TableNav } from './tableNav';
 export { TableButtons } from './tableButtons';
+export { PacksList } from './packsList';
 export * from './common';
