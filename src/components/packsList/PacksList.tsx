@@ -1,23 +1,41 @@
-import React, { KeyboardEvent, memo, useEffect, useState } from 'react';
+import React, { KeyboardEvent, memo, useCallback, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import { setCurrentPageAC } from '../../store/reducers/packsReducer';
+
 import style from './PacksList.module.scss';
 
-import { TableSidebar, Table, TableNav, Modal, DeletePack, UpdatePack } from 'components';
+import {
+  TableSidebar,
+  Table,
+  TableNav,
+  Modal,
+  DeletePack,
+  UpdatePack,
+  Pagination,
+} from 'components';
 import { PATH } from 'enum';
 import { deletePackTC, setPacksTC, updatePackTC } from 'store/middlewares';
-import { getCardPacks, getIsAuth } from 'store/selectors';
+import {
+  getCardPacks,
+  getCardPacksTotalCount,
+  getIsAuth,
+  getPage,
+  getPageCount,
+} from 'store/selectors';
 
 export const PacksList = memo(() => {
   const dispatch = useDispatch();
   const isAuth = useSelector(getIsAuth);
   const cardPacks = useSelector(getCardPacks);
+  const currentPage = useSelector(getPage);
+  const totalCount = useSelector(getCardPacksTotalCount);
+  const perPage = useSelector(getPageCount);
 
   const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
   const [isUpdateModalShown, setIsUpdateModalShown] = useState(false);
-
   const [packId, setPackId] = useState('');
 
   const tableHeaders = {
@@ -29,7 +47,7 @@ export const PacksList = memo(() => {
 
   useEffect(() => {
     dispatch(setPacksTC());
-  }, []);
+  }, [currentPage]);
 
   const onEscapePress = (e: KeyboardEvent<HTMLDivElement>): void => {
     if (e.key === 'Escape') {
@@ -43,6 +61,10 @@ export const PacksList = memo(() => {
   const onUpdateButtonClick = (packName: string): void => {
     dispatch(updatePackTC(packId, packName, () => setIsUpdateModalShown(false)));
   };
+
+  const handlePageChange = useCallback((page: number) => {
+    dispatch(setCurrentPageAC(page));
+  }, []);
 
   if (!isAuth) {
     return <Navigate to={PATH.LOGIN} />;
@@ -64,6 +86,12 @@ export const PacksList = memo(() => {
           setId={setPackId}
           openDeleteModal={() => setIsDeleteModalShown(true)}
           openUpdateModal={() => setIsUpdateModalShown(true)}
+        />
+        <Pagination
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          totalCount={totalCount}
+          pageSize={perPage}
         />
       </div>
       <Modal isActive={isDeleteModalShown} setIsActive={setIsDeleteModalShown}>
