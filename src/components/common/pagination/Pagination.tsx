@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-import './Pagination.module.scss';
+import './Pagination.scss';
 
 import { DOTS, usePagination } from 'hooks';
 import { ReturnComponentType } from 'types';

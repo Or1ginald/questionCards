@@ -3,6 +3,7 @@ import React, { memo, useCallback, useState } from 'react';
 import st from './TableNav.module.scss';
 
 import { AddPack, CustomButton, CustomTextInput, Modal } from 'components';
+import { ReactComponent as AddIcon } from 'svg/add_black_18dp.svg';
 
 export const TableNav = memo(() => {
   const [searchValue, setSearchValue] = useState('');
@@ -18,7 +19,9 @@ export const TableNav = memo(() => {
         onChange={setSearchValue}
         value={searchValue}
       />
-      <CustomButton title="Add Pack" onClick={() => setIsModalVisible(true)} />
+      <CustomButton title="Add Pack" onClick={() => setIsModalVisible(true)}>
+        <AddIcon />
+      </CustomButton>
       <Modal isActive={isModalVisible} setIsActive={setIsModalVisible}>
         <AddPack handleModalClose={isActiveHandler} />
       </Modal>

@@ -87,12 +87,14 @@ export const PacksList = memo(() => {
           openDeleteModal={() => setIsDeleteModalShown(true)}
           openUpdateModal={() => setIsUpdateModalShown(true)}
         />
-        <Pagination
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-          totalCount={totalCount}
-          pageSize={perPage}
-        />
+        <div className={style.paginationWrap}>
+          <Pagination
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+            totalCount={totalCount}
+            pageSize={perPage}
+          />
+        </div>
       </div>
       <Modal isActive={isDeleteModalShown} setIsActive={setIsDeleteModalShown}>
         <DeletePack
