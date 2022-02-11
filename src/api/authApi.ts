@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 
-import { Nullable } from '../types';
-import { passwordRequestForm } from '../utils';
-
 import { instance } from './apiConfig';
+
+import { Nullable } from 'types';
+import { passwordRequestForm } from 'utils';
 
 export type LoginResponseType = {
   _id: string;
