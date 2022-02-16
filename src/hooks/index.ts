@@ -3,3 +3,4 @@ export { useAppSelector } from './useAppSelector';
 export { useInput } from './useInput';
 export * from './usePagination';
 export type { UseInputReturnTypeAny } from './useInput';
+export { useTextInputDebounce } from './useTextInputDebounce';
