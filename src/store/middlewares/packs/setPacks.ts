@@ -1,7 +1,6 @@
-import { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
 
-import { setIsLoadingAC } from '../../reducers/appReducer';
+import { setErrorAC, setIsLoadingAC } from '../../reducers/appReducer';
 import { fetchPacksAC } from '../../reducers/packsReducer';
 
 import { packsAPI } from 'api';
@@ -14,15 +13,10 @@ export const setPacksTC = (): AppThunk => (dispatch: Dispatch, getState) => {
   packsAPI
     .getPacks(packName, minCardsCount, maxCardsCount, sortPacks, page, pageCount, user_id)
     .then(res => {
-      console.log(res.data);
       dispatch(fetchPacksAC(res.data));
     })
-    .catch((e: AxiosError) => {
-      console.log(e.message);
-      // const errorNetwork = e.response
-      //   ? e.response.data.error
-      //   : `${e.message}, more details in the console`;
-      // // dispatch(setErrorMessageNetworkAC(errorNetwork));
+    .catch(e => {
+      dispatch(setErrorAC(e.message ?? e.response.data.error));
     })
     .finally(() => {
       dispatch(setIsLoadingAC(false));

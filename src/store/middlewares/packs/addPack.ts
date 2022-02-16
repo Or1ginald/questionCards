@@ -1,6 +1,4 @@
-import { AxiosError } from 'axios';
-
-import { setIsLoadingAC, setNotificationAC } from '../../reducers/appReducer';
+import { setErrorAC, setIsLoadingAC, setNotificationAC } from '../../reducers/appReducer';
 
 import { packsAPI } from 'api';
 import { setPacksTC } from 'store/middlewares';
@@ -12,8 +10,7 @@ export const addPackTC =
     dispatch(setIsLoadingAC(true));
     packsAPI
       .addPack(name)
-      .then(res => {
-        console.log(res.data);
+      .then(() => {
         closeModal();
       })
       .then(() => {
@@ -21,12 +18,8 @@ export const addPackTC =
         dispatch(setPacksTC());
         dispatch(setNotificationAC('Pack was added'));
       })
-      .catch((e: AxiosError) => {
-        console.log(e.message);
-        // const errorNetwork = e.response
-        //   ? e.response.data.error
-        //   : `${e.message}, more details in the console`;
-        // // dispatch(setErrorMessageNetworkAC(errorNetwork));
+      .catch(e => {
+        dispatch(setErrorAC(e.message ?? e.response.data.error));
       })
       .finally(() => {
         dispatch(setIsLoadingAC(false));

@@ -1,6 +1,4 @@
-import { AxiosError } from 'axios';
-
-import { setIsLoadingAC, setNotificationAC } from '../../reducers/appReducer';
+import { setErrorAC, setIsLoadingAC, setNotificationAC } from '../../reducers/appReducer';
 
 import { packsAPI } from 'api';
 import { setPacksTC } from 'store/middlewares';
@@ -12,19 +10,12 @@ export const deletePackTC =
     dispatch(setIsLoadingAC(true));
     packsAPI
       .deletePack(packId)
-      .then(res => {
-        console.log(res.data);
-      })
       .then(() => {
         dispatch(setPacksTC());
         dispatch(setNotificationAC('Pack was deleted'));
       })
-      .catch((e: AxiosError) => {
-        console.log(e.message);
-        // const errorNetwork = e.response
-        //   ? e.response.data.error
-        //   : `${e.message}, more details in the console`;
-        // // dispatch(setErrorMessageNetworkAC(errorNetwork));
+      .catch(e => {
+        dispatch(setErrorAC(e.message ?? e.response.data.error));
       })
       .finally(() => {
         closeModal();
