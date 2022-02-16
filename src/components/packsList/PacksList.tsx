@@ -23,6 +23,7 @@ import {
   getCardPacks,
   getCardPacksTotalCount,
   getIsAuth,
+  getPackName,
   getPage,
   getPageCount,
   getSortPacks,
@@ -36,6 +37,7 @@ export const PacksList = memo(() => {
   const totalCount = useSelector(getCardPacksTotalCount);
   const perPage = useSelector(getPageCount);
   const sort = useSelector(getSortPacks);
+  const searchPackName = useSelector(getPackName);
 
   const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
   const [isUpdateModalShown, setIsUpdateModalShown] = useState(false);
@@ -56,7 +58,7 @@ export const PacksList = memo(() => {
 
   useEffect(() => {
     dispatch(setPacksTC());
-  }, [currentPage, sort]);
+  }, [currentPage, sort, searchPackName]);
 
   const onEscapePress = (e: KeyboardEvent<HTMLDivElement>): void => {
     if (e.key === 'Escape') {
