@@ -1,19 +1,28 @@
 import React, { memo } from 'react';
 
+import { ARRAY_ZERO_ELEMENT } from '../../../constants/base';
+
 import s from './Table.module.scss';
 
 import { CardPackType } from 'api/types';
 import { TableButtons } from 'components';
-import { ARRAY_FIRST_ELEMENT, ARRAY_ZERO_ELEMENT } from 'constants/base';
+// import { ARRAY_FIRST_ELEMENT, ARRAY_ZERO_ELEMENT } from 'constants/base';
 import { normalizeDate } from 'utils';
 
+type TableHeaderType = {
+  key: string;
+  label: string;
+};
+
 type TablePropsType = {
-  cardPacks: CardPackType[];
-  tableHeaders: { [x: string]: string };
+  cardPacks: CardPackType[]; // tableHeaders: { [x: string]: string };
+  tableHeaders: TableHeaderType[];
   // handleDeleteButtonClick: (id: string) => void;
   setId: (id: string) => void;
   openDeleteModal: () => void;
   openUpdateModal: () => void;
+  handleOnSortClick: (param: string) => void;
+  sort: string;
 };
 
 export const Table = memo((props: TablePropsType) => {
@@ -24,19 +33,34 @@ export const Table = memo((props: TablePropsType) => {
     setId,
     openDeleteModal,
     openUpdateModal,
+    sort,
+    handleOnSortClick,
   } = props;
 
+  const arrow = sort[ARRAY_ZERO_ELEMENT] === '0' ? '⬇' : '⬆';
+
+  // const [sortKey, setSortKey] = useState('');
+  // const [sortOrder, setSortOrder] = useState('');
+
   // const dispatch = useDispatch();
+  const one = 1;
 
   return (
     <table className={s.table}>
       <thead>
         <tr>
-          {Object.entries(tableHeaders).map(tableHeader => (
-            <th key={tableHeader[ARRAY_ZERO_ELEMENT]}>
-              {tableHeader[ARRAY_FIRST_ELEMENT]}
-            </th>
-          ))}
+          {tableHeaders.map(({ key, label }) => {
+            const onSortButtonClick = (): void => {
+              handleOnSortClick(key);
+            };
+            const tableHeader =
+              key === sort.split('').splice(one).join('') ? label + arrow : label;
+            return (
+              <th key={key} onClick={onSortButtonClick}>
+                {tableHeader}
+              </th>
+            );
+          })}
           <th>Actions</th>
         </tr>
       </thead>
