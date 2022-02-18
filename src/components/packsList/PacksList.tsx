@@ -102,7 +102,7 @@ export const PacksList = memo(() => {
         <TableSidebar />
         <TableNav />
         <Table
-          cardPacks={cardPacks}
+          tableItems={cardPacks}
           tableHeaders={tableHeaders}
           // handleDeleteButtonClick={(id: string) => onDeleteButtonClick(id)}
           setId={setPackId}
