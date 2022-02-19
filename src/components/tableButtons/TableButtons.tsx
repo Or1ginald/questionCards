@@ -33,14 +33,14 @@ export const TableButtons = memo((props: TableButtonsPropsType) => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        gap: '.5em',
-      }}
+    <
+      // style={{
+      //   display: 'flex',
+      //   justifyContent: 'start',
+      //   alignItems: 'start',
+      //   width: '100%',
+      //   gap: '.5em',
+      // }}
     >
       <CustomButton title="Inspect" disabled={isLoading}>
         <WatchIcon />
@@ -55,6 +55,6 @@ export const TableButtons = memo((props: TableButtonsPropsType) => {
           <DeleteIcon />
         </CustomButton>
       )}
-    </div>
+    </>
   );
 });

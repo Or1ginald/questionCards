@@ -37,6 +37,7 @@ export const Table = memo((props: TablePropsType) => {
 
   const arrow = sort[ARRAY_ZERO_ELEMENT] === '0' ? '⬇' : '⬆';
   const keys = tableHeaders.map(header => header.key);
+  const labels = tableHeaders.map(header => header.label);
 
   // const [sortKey, setSortKey] = useState('');
   // const [sortOrder, setSortOrder] = useState('');
@@ -66,11 +67,15 @@ export const Table = memo((props: TablePropsType) => {
       <tbody>
         {tableItems.map(tableItem => (
           <tr key={tableItem._id}>
-            {keys.map(key =>
+            {keys.map((key, i) =>
               key === 'updated' ? (
-                <td key={key}>{normalizeDate(tableItem[key])}</td>
+                <td key={key} data-th={labels[i]}>
+                  {normalizeDate(tableItem[key])}
+                </td>
               ) : (
-                <td key={key}>{tableItem[key]}</td>
+                <td key={key} data-th={labels[i]}>
+                  {tableItem[key]}
+                </td>
               ),
             )}
             {/* <td>{el.name}</td> */}

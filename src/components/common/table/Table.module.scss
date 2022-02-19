@@ -1,15 +1,11 @@
 $breakpoint-alpha: 800px; // adjust to your needs
 
-//table, th, td {
-//  border: 1px solid black;
-//  border-collapse: collapse;
-//}
 
 
 .table {
 
   table-layout: fixed;
-  width: 100%;
+  //width: 100%;
 
   tr {
     border-top: 1px solid #ddd;
@@ -22,12 +18,18 @@ $breakpoint-alpha: 800px; // adjust to your needs
   }
 
   .flexCell{
+
     display: flex;
-    //justify-content: center;
+    justify-content: center;
     align-items: center;
-    flex-direction: row;
-    gap: 0.5em;
-    //flex-wrap: wrap;
+    //width: 100%;
+    gap: .5em;
+    //@media (max-width: $breakpoint-alpha) {
+    //  flex-direction: row;
+    //  justify-content: center;
+    //  align-items: center;
+    //}
+
     button{
       max-width: 4em;
     }
@@ -83,8 +85,8 @@ $breakpoint-alpha: 800px; // adjust to your needs
       font-weight: bold;
 
       // optional stuff to make it look nicer
-      width: 4.5em; // magic number :( adjust according to your own content
-      display: inline-block;
+      //width: 4.5em; // magic number :( adjust according to your own content
+      //display: inline-block;
       // end options
 
       @media (min-width: $breakpoint-alpha) {
@@ -95,7 +97,7 @@ $breakpoint-alpha: 800px; // adjust to your needs
 
 
   th, td {
-    text-align: left;
+    //text-align: left;
     min-width: 200px;
     @media (min-width: $breakpoint-alpha) {
       min-width: 100px;

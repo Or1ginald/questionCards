@@ -1,7 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
 .table {
   table-layout: fixed;
-  width: 100%;
 }
 .table tr {
   border-top: 1px solid #ddd;
@@ -13,8 +12,8 @@
 }
 .table .flexCell {
   display: flex;
+  justify-content: center;
   align-items: center;
-  flex-direction: row;
   gap: 0.5em;
 }
 .table .flexCell button {
@@ -64,8 +63,6 @@
 .table td:before {
   content: attr(data-th) " ";
   font-weight: bold;
-  width: 4.5em;
-  display: inline-block;
 }
 @media (min-width: 800px) {
   .table td:before {
@@ -73,7 +70,6 @@
   }
 }
 .table th, .table td {
-  text-align: left;
   min-width: 200px;
 }
 @media (min-width: 800px) {
