@@ -26,5 +26,7 @@ export const normalizeDate = (date: string): string => {
   const d = dateObj.getDay();
   const h = dateObj.getHours();
   const m = dateObj.getMinutes();
-  return `${D}/${addLeadingZero(M)}/${Y} ${h}:${m}(${weekDays[d]})`;
+  return `${D}/${addLeadingZero(M)}/${Y} ${addLeadingZero(h)}:${addLeadingZero(m)}(${
+    weekDays[d]
+  })`;
 };
