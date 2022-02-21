@@ -23,6 +23,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  gap: 0.5em;
 }
 .loginForm .container .form .additions input {
   margin-right: 0.5em;

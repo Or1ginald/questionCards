@@ -10,25 +10,19 @@ import { PATH } from 'enum';
 import {
   getIsAuth,
   getIsInitialized,
-  /* getMaxCardsCount,
-  getMinCardsCount,
-  getPackName,
-  getSortPacks, */
   getIsLoading,
   getUserAvatar,
   getUserEmail,
-  // getUserID,
   getUserName,
 } from 'store';
 // import { getPage, getPageCount } from 'store/selectors';
 
 export const Profile = memo(() => {
-  console.log('render');
-
   const isAuth = useSelector(getIsAuth);
   const userName = useSelector(getUserName);
   const userEmail = useSelector(getUserEmail);
   const avatar = useSelector(getUserAvatar);
+  console.log(avatar);
 
   /* const page = useSelector(getPage);
   const pageCount = useSelector(getPageCount);

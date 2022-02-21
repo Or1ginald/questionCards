@@ -104,7 +104,8 @@ export const authMeTC = (): AppThunk => (dispatch: Dispatch) => {
       dispatch(setIsAuthAC(true));
     })
     .catch(e => {
-      dispatch(setErrorAC(e.response.data.error));
+      // console.log(JSON.stringify(e));
+      dispatch(setErrorAC(e.message));
     })
     .finally(() => dispatch(setIsLoadingAC(false)));
 };
@@ -118,7 +119,12 @@ export const logoutTC = (): AppThunk => (dispatch: Dispatch) => {
       dispatch(setIsAuthAC(false));
       dispatch(setNotificationAC('You have been successfully logged out!'));
     })
-    .catch(e => dispatch(setErrorAC(e.response.data.error)))
+    .catch(() => {
+      // dispatch(setErrorAC(e.response.data.error));
+      dispatch(setStateToDefaultAC());
+      dispatch(setIsAuthAC(false));
+      dispatch(setNotificationAC('You have been successfully logged out!'));
+    })
     .finally(() => dispatch(setIsLoadingAC(false)));
 };
 export const registerTC = (): AppThunk => (dispatch: Dispatch, getState) => {

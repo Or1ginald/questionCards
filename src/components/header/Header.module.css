@@ -12,7 +12,6 @@
   justify-content: center;
   min-height: 20px;
 }
-
 .container {
   display: flex;
   align-items: center;
@@ -45,6 +44,7 @@
 @media (max-width: 450px) {
   .container {
     padding: 10px 0.5em;
+    max-width: 320px;
   }
 }
 

@@ -94,6 +94,9 @@ export const initializeTC = (): AppThunk => (dispatch: Dispatch) => {
       dispatch(setIsAuthAC(true));
       dispatch(setUserProfileDataAC(res.data));
     })
+    .catch(() => {
+      console.log('redirect to login');
+    })
     .finally(() => {
       dispatch(setIsInitializedAC(true));
       dispatch(setIsLoadingAC(false));
