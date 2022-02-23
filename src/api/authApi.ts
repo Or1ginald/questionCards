@@ -11,7 +11,8 @@ export type LoginResponseType = {
   name: string;
   avatar?: string;
   publicCardPacksCount: number; // количество колод
-
+  token: string;
+  tokenDeathTime: number;
   created: Date;
   updated: Date;
   isAdmin: boolean;
