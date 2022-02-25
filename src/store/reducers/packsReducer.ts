@@ -8,6 +8,7 @@ const UPDATE_PACK = 'PACKS/UPDATE_PACK';
 const SET_WAS_TABLE_CHANGED = 'PACKS/SET_WAS_TABLE_CHANGED';
 const SET_PACK_NAME = 'PACKS/SET_PACK_NAME';
 const SET_SORT_PACKS = 'PACKS/SET_SORT_PACKS';
+const SET_USER_ID = 'PACKS/SET_USER_ID';
 
 export type packsReducerInitStateType = ResponsePacksType & {
   packName: string;
@@ -58,6 +59,8 @@ export const packsReducer = (
       return { ...state, sortPacks: action.sortPacks };
     case SET_PACK_NAME:
       return { ...state, packName: action.packName };
+    case SET_USER_ID:
+      return { ...state, user_id: action.user_id };
     default:
       return state;
   }
@@ -106,6 +109,11 @@ export const setPackNameAC = (packName: string) =>
     type: SET_PACK_NAME,
     packName,
   } as const);
+export const setUserIdAC = (user_id: string) =>
+  ({
+    type: SET_USER_ID,
+    user_id,
+  } as const);
 
 type ActionsType =
   | ReturnType<typeof fetchPacksAC>
@@ -115,6 +123,7 @@ type ActionsType =
   | ReturnType<typeof setWasTableChangedAC>
   | ReturnType<typeof setSortPacksAC>
   | ReturnType<typeof setPackNameAC>
+  | ReturnType<typeof setUserIdAC>
   | ReturnType<typeof setCurrentPageAC>;
 
 // thunk
