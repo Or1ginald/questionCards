@@ -45,12 +45,6 @@ export const PacksList = memo(() => {
   const [isUpdateModalShown, setIsUpdateModalShown] = useState(false);
   const [packId, setPackId] = useState('');
 
-  // const tableHeaders = {
-  //   name: 'Title',
-  //   cardsCount: 'Cards',
-  //   updated: 'Update',
-  //   user_name: 'Creator',
-  // };
   const tableHeaders = [
     { key: 'name', label: 'Title' },
     { key: 'cardsCount', label: 'Cards' },
@@ -106,7 +100,6 @@ export const PacksList = memo(() => {
         <Table
           tableItems={cardPacks}
           tableHeaders={tableHeaders}
-          // handleDeleteButtonClick={(id: string) => onDeleteButtonClick(id)}
           setId={setPackId}
           openDeleteModal={() => setIsDeleteModalShown(true)}
           openUpdateModal={() => setIsUpdateModalShown(true)}
