@@ -10,4 +10,6 @@ export enum PATH {
   CARDS = '/cards',
   CARD = '/card',
   PACKS_LIST = '/packsList',
+  CARDS_LIST = '/cards_list',
+  LEARN_CARD = '/question_card',
 }
