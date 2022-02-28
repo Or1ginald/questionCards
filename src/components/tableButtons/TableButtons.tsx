@@ -15,10 +15,11 @@ type TableButtonsPropsType = {
   setId: () => void;
   openDeleteModal: () => void;
   openUpdateModal: () => void;
+  onLearnClickHandler?: () => void;
 };
 
 export const TableButtons = memo((props: TableButtonsPropsType) => {
-  const { item, setId, openDeleteModal, openUpdateModal } = props;
+  const { item, setId, openDeleteModal, openUpdateModal, onLearnClickHandler } = props;
 
   const isLoading = useSelector(getIsLoading);
   const userProfileId = useSelector(getUserId);
@@ -42,9 +43,11 @@ export const TableButtons = memo((props: TableButtonsPropsType) => {
       //   gap: '.5em',
       // }}
     >
-      <CustomButton title="Inspect" disabled={isLoading}>
-        <WatchIcon />
-      </CustomButton>
+      {onLearnClickHandler && (
+        <CustomButton title="Inspect" disabled={isLoading}>
+          <WatchIcon />
+        </CustomButton>
+      )}
       {item.more_id === userProfileId && (
         <CustomButton title="Update" disabled={isLoading} onClick={onUpdateButtonClick}>
           <UpdIcon />
